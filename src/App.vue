@@ -1,15 +1,18 @@
-<script setup lang="ts"></script>
+<script lang="ts">
+import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      zhCn,
+    }
+  },
+})
+</script>
 
 <template>
-  <div class="flex justify-center"  style="width: 100vw">
-    <el-card class="box-card">
-    <template #header>
-      <div class="card-header">
-        <span>Card name</span>
-        <el-button class="button" text>Operation button</el-button>
-      </div>
-    </template>
-    <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
-  </el-card>
-  </div>
+  <el-config-provider :locale="zhCn">
+    <router-view></router-view>
+  </el-config-provider>
 </template>

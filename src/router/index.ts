@@ -33,10 +33,7 @@ import {
 
 import homeRouter from "./modules/home";
 import ableRouter from "./modules/able";
-import listRouter from "./modules/list";
-import aboutRouter from "./modules/about";
 import errorRouter from "./modules/error";
-import guideRouter from "./modules/guide";
 import resultRouter from "./modules/result";
 import nestedRouter from "./modules/nested";
 import remainingRouter from "./modules/remaining";
@@ -45,10 +42,7 @@ import remainingRouter from "./modules/remaining";
 const routes = [
   homeRouter,
   ableRouter,
-  listRouter,
-  aboutRouter,
   errorRouter,
-  guideRouter,
   resultRouter,
   nestedRouter
 ];

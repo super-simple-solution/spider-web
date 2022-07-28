@@ -8,7 +8,7 @@ import regist from "./components/regist.vue";
 import update from "./components/update.vue";
 import { initRouter } from "/@/router/utils";
 import { useNav } from "/@/layout/hooks/nav";
-import { message } from "@pureadmin/components";
+import { ElMessage } from "element-plus";
 import type { FormInstance } from "element-plus";
 import { storageSession } from "@pureadmin/utils";
 import { operates, thirdParty } from "./utils/enums";
@@ -65,7 +65,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
           accessToken: "eyJhbGciOiJIUzUxMiJ9.test"
         });
         initRouter("admin").then(() => {});
-        message.success("登录成功");
+        ElMessage.success("登录成功");
         router.push("/");
       }, 2000);
     } else {

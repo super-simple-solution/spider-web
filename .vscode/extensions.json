@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "vscode-icons-team.vscode-icons",
-    "stylelint.vscode-stylelint",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "lokalise.i18n-ally",

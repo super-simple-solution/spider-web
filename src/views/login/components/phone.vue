@@ -2,7 +2,7 @@
 import { ref, reactive } from "vue";
 import Motion from "../utils/motion";
 import { phoneRules } from "../utils/rule";
-import { message } from "@pureadmin/components";
+import { ElMessage } from "element-plus";
 import type { FormInstance } from "element-plus";
 import { useVerifyCode } from "../utils/verifyCode";
 import { useUserStoreHook } from "/@/store/modules/user";
@@ -23,7 +23,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
     if (valid) {
       // 模拟登录请求，需根据实际开发进行修改
       setTimeout(() => {
-        message.success("登录成功");
+        ElMessage.success("登录成功");
         loading.value = false;
       }, 2000);
     } else {

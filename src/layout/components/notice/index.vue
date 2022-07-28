@@ -2,10 +2,7 @@
 import { ref } from "vue";
 import { noticesData } from "./data";
 import NoticeList from "./noticeList.vue";
-import { templateRef } from "@vueuse/core";
-import { Tabs, TabPane } from "@pureadmin/components";
 
-const dropdownDom = templateRef<ElRef | null>("dropdownDom", null);
 const activeName = ref(noticesData[0].name);
 const notices = ref(noticesData);
 
@@ -14,8 +11,8 @@ notices.value.forEach(notice => {
   noticesNum.value += notice.list.length;
 });
 
+const dropdownDom = ref();
 function tabClick() {
-  // @ts-expect-error
   dropdownDom.value.handleOpen();
 }
 </script>
@@ -31,22 +28,24 @@ function tabClick() {
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <Tabs
-          centered
+        <el-tabs
+          v-model="activeName"
           class="dropdown-tabs"
-          v-model:activeName="activeName"
-          @tabClick="tabClick"
+          @tab-click="tabClick"
         >
           <template v-for="item in notices" :key="item.key">
-            <TabPane :tab="`${item.name}(${item.list.length})`">
+            <el-tab-pane
+              :label="`${item.name}(${item.list.length})`"
+              :name="`${item.name}`"
+            >
               <el-scrollbar max-height="330px">
                 <div class="noticeList-container">
                   <NoticeList :list="item.list" />
                 </div>
               </el-scrollbar>
-            </TabPane>
+            </el-tab-pane>
           </template>
-        </Tabs>
+        </el-tabs>
       </el-dropdown-menu>
     </template>
   </el-dropdown>

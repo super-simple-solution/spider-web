@@ -28,7 +28,6 @@
       "node",
       "vite/client",
       "element-plus/global",
-      "@pureadmin/table/volar",
       "unplugin-vue-define-options",
       "@pureadmin/descriptions/volar"
     ],

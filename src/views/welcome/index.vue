@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import avatars from "/@/assets/avatars.jpg";
-import Github from "./components/Github.vue";
 import Infinite from "./components/Infinite.vue";
 
 defineOptions({
@@ -65,9 +64,7 @@ const openDepot = (): void => {
             <span style="font-size: 16px; font-weight: 500">GitHub信息</span>
           </template>
           <el-skeleton animated :rows="7" :loading="loading">
-            <template #default>
-              <Github />
-            </template>
+            <template #default> w </template>
           </el-skeleton>
         </el-card>
       </el-col>

@@ -75,41 +75,6 @@ const permissionRouter = {
   ]
 };
 
-const frameRouter = {
-  path: "/iframe",
-  redirect: "/iframe/pure",
-  meta: {
-    icon: "monitor",
-    title: "menus.hsExternalPage",
-    rank: 10
-  },
-  children: [
-    {
-      path: "/iframe/pure",
-      name: "FramePure",
-      meta: {
-        title: "menus.hsPureDocument",
-        frameSrc: "https://pure-admin-doc.vercel.app"
-      }
-    },
-    {
-      path: "/external",
-      name: "https://pure-admin-doc.vercel.app",
-      meta: {
-        title: "menus.externalLink"
-      }
-    },
-    {
-      path: "/iframe/ep",
-      name: "FrameEp",
-      meta: {
-        title: "menus.hsEpDocument",
-        frameSrc: "https://element-plus.org/zh-CN/"
-      }
-    }
-  ]
-};
-
 const tabsRouter = {
   path: "/tabs",
   redirect: "/tabs/index",
@@ -155,7 +120,6 @@ export default [
           code: 0,
           info: [
             tabsRouter,
-            frameRouter,
             systemRouter,
             setDifAuthority("v-admin", permissionRouter)
           ]

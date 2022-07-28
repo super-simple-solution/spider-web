@@ -3,13 +3,9 @@
   "version": "0.0.2",
   "private": true,
   "scripts": {
-    "dev": "cross-env --max_old_space_size=4096 vite",
-    "serve": "pnpm dev",
-    "build": "rimraf dist && cross-env NODE_OPTIONS=--max-old-space-size=8192 vite build",
-    "build:staging": "rimraf dist && cross-env vite build --mode staging",
-    "report": "rimraf dist && cross-env vite build",
-    "cloc": "cross-env --max_old_space_size=4096 cloc . --exclude-dir=node_modules --exclude-lang=YAML",
-    "clean:cache": "rm -rf node_modules && rm -rf .eslintcache && pnpm install",
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
     "lint": "eslint --fix --ext .js,.vue ."
   },
   "browserslist": [

@@ -9,7 +9,6 @@ import { routerArrays } from "/@/layout/types";
 import { transformI18n } from "/@/plugins/i18n";
 import { storageSession } from "@pureadmin/utils";
 import { useAppStoreHook } from "/@/store/modules/app";
-import { i18nChangeLanguage } from "@wangeditor/editor";
 import { useEpThemeStoreHook } from "/@/store/modules/epTheme";
 import { useMultiTagsStoreHook } from "/@/store/modules/multiTags";
 

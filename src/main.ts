@@ -8,7 +8,6 @@ import { useI18n } from "../src/plugins/i18n";
 import { MotionPlugin } from "@vueuse/motion";
 import { useEcharts } from "/@/plugins/echarts";
 import VirtualScroller from "vue-virtual-scroller";
-import { useTable } from "../src/plugins/vxe-table";
 import { injectResponsiveStorage } from "/@/utils/responsive";
 
 import Table from "@pureadmin/table";
@@ -27,7 +26,6 @@ import "@pureadmin/components/dist/dark.scss";
 // 导入字体图标
 import "./assets/iconfont/iconfont.js";
 import "./assets/iconfont/iconfont.css";
-import "v-contextmenu/dist/themes/default.css";
 import "vue-virtual-scroller/dist/vue-virtual-scroller.css";
 
 const app = createApp(App);
@@ -59,7 +57,6 @@ getServerConfig(app).then(async config => {
     .use(ElementPlus)
     .use(Table)
     .use(PureDescriptions)
-    .use(useTable)
     .use(useEcharts)
     .use(VirtualScroller);
   app.mount("#app");

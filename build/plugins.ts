@@ -1,7 +1,6 @@
 import { resolve } from "path";
 import Unocss from "unocss/vite";
 import vue from "@vitejs/plugin-vue";
-import { viteBuildInfo } from "./info";
 import svgLoader from "vite-svg-loader";
 import legacy from "@vitejs/plugin-legacy";
 import vueJsx from "@vitejs/plugin-vue-jsx";
@@ -30,7 +29,6 @@ export function getPluginsList(command, VITE_LEGACY) {
     DefineOptions(),
     // 线上环境删除console
     removeConsole({ external: ["src/assets/iconfont/iconfont.js"] }),
-    viteBuildInfo(),
     // 自定义主题
     themePreprocessorPlugin({
       scss: {

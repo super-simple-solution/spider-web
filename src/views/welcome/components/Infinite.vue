@@ -8,52 +8,52 @@ const scroll = templateRef<ElRef | null>("scroll", null);
 let listData = ref([
   {
     date: "2021-09-01",
-    name: "vue-pure-admin",
+    name: "spider",
     star: "1000"
   },
   {
     date: "2021-09-02",
-    name: "vue-pure-admin",
+    name: "spider",
     star: "1100"
   },
   {
     date: "2021-09-03",
-    name: "vue-pure-admin",
+    name: "spider",
     star: "1200"
   },
   {
     date: "2021-09-04",
-    name: "vue-pure-admin",
+    name: "spider",
     star: "1300"
   },
   {
     date: "2021-09-05",
-    name: "vue-pure-admin",
+    name: "spider",
     star: "1400"
   },
   {
     date: "2021-09-06",
-    name: "vue-pure-admin",
+    name: "spider",
     star: "1500"
   },
   {
     date: "2021-09-07",
-    name: "vue-pure-admin",
+    name: "spider",
     star: "1600"
   },
   {
     date: "2021-09-08",
-    name: "vue-pure-admin",
+    name: "spider",
     star: "1700"
   },
   {
     date: "2021-09-09",
-    name: "vue-pure-admin",
+    name: "spider",
     star: "1800"
   },
   {
     date: "2021-09-10",
-    name: "vue-pure-admin",
+    name: "spider",
     star: "1900"
   }
 ]);

@@ -6,7 +6,6 @@ import { getServerConfig } from "./config";
 import { createApp, Directive } from "vue";
 import { useI18n } from "../src/plugins/i18n";
 import { MotionPlugin } from "@vueuse/motion";
-import { useEcharts } from "/@/plugins/echarts";
 import VirtualScroller from "vue-virtual-scroller";
 import { injectResponsiveStorage } from "/@/utils/responsive";
 
@@ -57,7 +56,6 @@ getServerConfig(app).then(async config => {
     .use(ElementPlus)
     .use(Table)
     .use(PureDescriptions)
-    .use(useEcharts)
     .use(VirtualScroller);
   app.mount("#app");
 });

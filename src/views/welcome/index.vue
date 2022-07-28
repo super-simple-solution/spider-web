@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import Bar from "./components/Bar.vue";
-import Pie from "./components/Pie.vue";
-import Line from "./components/Line.vue";
 import avatars from "/@/assets/avatars.jpg";
 import Github from "./components/Github.vue";
 import Infinite from "./components/Infinite.vue";
@@ -104,108 +101,6 @@ const openDepot = (): void => {
           <el-skeleton animated :rows="7" :loading="loading">
             <template #default>
               <Infinite />
-            </template>
-          </el-skeleton>
-        </el-card>
-      </el-col>
-
-      <el-col
-        :xs="24"
-        :sm="24"
-        :md="12"
-        :lg="8"
-        :xl="8"
-        style="margin-bottom: 20px"
-        v-motion
-        :initial="{
-          opacity: 0,
-          y: 100
-        }"
-        :enter="{
-          opacity: 1,
-          y: 0,
-          transition: {
-            delay: 400
-          }
-        }"
-      >
-        <el-card>
-          <template #header>
-            <span style="font-size: 16px; font-weight: 500">
-              GitHub饼图信息
-            </span>
-          </template>
-          <el-skeleton animated :rows="7" :loading="loading">
-            <template #default>
-              <Pie />
-            </template>
-          </el-skeleton>
-        </el-card>
-      </el-col>
-
-      <el-col
-        :xs="24"
-        :sm="24"
-        :md="12"
-        :lg="8"
-        :xl="8"
-        style="margin-bottom: 20px"
-        v-motion
-        :initial="{
-          opacity: 0,
-          y: 100
-        }"
-        :enter="{
-          opacity: 1,
-          y: 0,
-          transition: {
-            delay: 400
-          }
-        }"
-      >
-        <el-card>
-          <template #header>
-            <span style="font-size: 16px; font-weight: 500">
-              GitHub折线图信息
-            </span>
-          </template>
-          <el-skeleton animated :rows="7" :loading="loading">
-            <template #default>
-              <Line />
-            </template>
-          </el-skeleton>
-        </el-card>
-      </el-col>
-
-      <el-col
-        :xs="24"
-        :sm="24"
-        :md="24"
-        :lg="8"
-        :xl="8"
-        style="margin-bottom: 20px"
-        v-motion
-        :initial="{
-          opacity: 0,
-          y: 100
-        }"
-        :enter="{
-          opacity: 1,
-          y: 0,
-          transition: {
-            delay: 400
-          }
-        }"
-      >
-        <el-card>
-          <template #header>
-            <span style="font-size: 16px; font-weight: 500">
-              GitHub柱状图信息
-            </span>
-          </template>
-          <el-skeleton animated :rows="7" :loading="loading">
-            <template #default>
-              <Bar />
             </template>
           </el-skeleton>
         </el-card>

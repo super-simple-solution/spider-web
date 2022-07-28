@@ -11,6 +11,7 @@ import { storageSession } from "@pureadmin/utils";
 import { useAppStoreHook } from "/@/store/modules/app";
 import { useEpThemeStoreHook } from "/@/store/modules/epTheme";
 import { useMultiTagsStoreHook } from "/@/store/modules/multiTags";
+import { i18nChangeLanguage } from "@wangeditor/editor";
 
 const errorInfo = "当前路由配置不正确，请检查配置";
 

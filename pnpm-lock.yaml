@@ -6,6 +6,7 @@ specifiers:
   '@pureadmin/theme': ^2.4.0
   '@pureadmin/utils': ^0.0.33
   '@types/js-cookie': ^3.0.1
+  '@types/lodash-es': ^4.17.6
   '@types/node': 14.14.14
   '@types/nprogress': 0.2.0
   '@typescript-eslint/eslint-plugin': ^5.10.2
@@ -26,8 +27,8 @@ specifiers:
   eslint-plugin-prettier: ^4.0.0
   eslint-plugin-vue: ^8.4.1
   js-cookie: ^3.0.1
-  loadsh: ^0.0.4
   lodash: ^4.17.21
+  lodash-es: ^4.17.21
   lodash-unified: ^1.0.2
   mitt: ^3.0.0
   mockjs: ^1.1.0
@@ -70,9 +71,9 @@ dependencies:
   element-plus: 2.2.11_vue@3.2.37
   element-resize-detector: 1.2.4
   js-cookie: 3.0.1
-  loadsh: 0.0.4
   lodash: 4.17.21
-  lodash-unified: 1.0.2_lodash@4.17.21
+  lodash-es: 4.17.21
+  lodash-unified: 1.0.2_3ib2ivapxullxkx3xftsimdk7u
   mitt: 3.0.0
   mockjs: 1.1.0
   nprogress: 0.2.0
@@ -91,6 +92,7 @@ devDependencies:
   '@intlify/vite-plugin-vue-i18n': 5.0.0_e4cmfr2yyq6ehuyzd34qpsi4km
   '@pureadmin/theme': 2.4.0
   '@types/js-cookie': 3.0.2
+  '@types/lodash-es': 4.17.6
   '@types/node': 14.14.14
   '@types/nprogress': 0.2.0
   '@typescript-eslint/eslint-plugin': 5.30.7_6wltbjakwuqm7awqswigmiuhd4
@@ -730,11 +732,9 @@ packages:
     resolution: {integrity: sha512-R+zTeVUKDdfoRxpAryaQNRKk3105Rrgx2CFRClIgRGaqDTdjsm8h6IYA8ir584W3ePzkZfst5xIgDwYrlh9HLg==}
     dependencies:
       '@types/lodash': 4.14.182
-    dev: false
 
   /@types/lodash/4.14.182:
     resolution: {integrity: sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==}
-    dev: false
 
   /@types/minimatch/3.0.5:
     resolution: {integrity: sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==}
@@ -2858,11 +2858,6 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /loadsh/0.0.4:
-    resolution: {integrity: sha512-U+wLL8InpfRalWrr+0SuhWgGt10M4OyAk6G8xCYo2rwpiHtxZkWiFpjei0vO463ghW8LPCdhqQxXlMy2qicAEw==}
-    deprecated: This is a typosquat on the popular Lodash package. This is not maintained nor is the original Lodash package.
-    dev: false
-
   /local-pkg/0.4.2:
     resolution: {integrity: sha512-mlERgSPrbxU3BP4qBqAvvwlgW4MTg78iwJdGGnv7kibKjWcJksrG3t6LB5lXI93wXRDvG4NpUgJFmTG4T6rdrg==}
     engines: {node: '>=14'}
@@ -2896,16 +2891,6 @@ packages:
       '@types/lodash-es': 4.17.6
       lodash: 4.17.21
       lodash-es: 4.17.21
-    dev: false
-
-  /lodash-unified/1.0.2_lodash@4.17.21:
-    resolution: {integrity: sha512-OGbEy+1P+UT26CYi4opY4gebD8cWRDxAT6MAObIVQMiqYdxZr1g3QHWCToVsm31x2NkLS4K3+MC2qInaRMa39g==}
-    peerDependencies:
-      '@types/lodash-es': '*'
-      lodash: '*'
-      lodash-es: '*'
-    dependencies:
-      lodash: 4.17.21
     dev: false
 
   /lodash.memoize/4.1.2:

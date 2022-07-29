@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useDark } from "@pureadmin/utils";
+import { ref } from "vue";
 
 interface Props {
   isActive: boolean;
@@ -8,7 +8,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   isActive: false
 });
-const { isDark } = useDark();
+const isDark = ref(true);
 
 const emit = defineEmits<{
   (e: "toggleClick"): void;

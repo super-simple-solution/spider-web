@@ -3,9 +3,8 @@ import { setType } from "./types";
 import { emitter } from "/@/utils/mitt";
 import { useLayout } from "./hooks/useLayout";
 import { useAppStoreHook } from "/@/store/modules/app";
-import { deviceDetection, useDark } from "@pureadmin/utils";
 import { useSettingStoreHook } from "/@/store/modules/settings";
-import { h, reactive, computed, onMounted, defineComponent } from "vue";
+import { h, ref, reactive, computed, defineComponent } from "vue";
 
 import backTop from "/@/assets/svg/back_top.svg?component";
 import fullScreen from "/@/assets/svg/full_screen.svg?component";
@@ -18,8 +17,7 @@ import setting from "./components/setting/index.vue";
 import Vertical from "./components/sidebar/vertical.vue";
 import Horizontal from "./components/sidebar/horizontal.vue";
 
-const { isDark } = useDark();
-const isMobile = deviceDetection();
+const isDark = ref(true);
 const pureSetting = useSettingStoreHook();
 
 const { instance, layout } = useLayout();
@@ -72,7 +70,6 @@ let isAutoCloseSidebar = true;
 
 // 监听容器
 emitter.on("resize", ({ detail }) => {
-  if (isMobile) return;
   let { width } = detail;
   width <= 670 ? setTheme("vertical") : setTheme(useAppStoreHook().layout);
   /** width app-wrapper类容器宽度
@@ -93,12 +90,6 @@ emitter.on("resize", ({ detail }) => {
       toggle("desktop", true);
       isAutoCloseSidebar = true;
     }
-  }
-});
-
-onMounted(() => {
-  if (isMobile) {
-    toggle("mobile", false);
   }
 });
 

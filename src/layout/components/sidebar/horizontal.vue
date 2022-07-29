@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
 import { useNav } from "../../hooks/nav";
-import Search from "../search/index.vue";
 import Notice from "../notice/index.vue";
 import { templateRef } from "@vueuse/core";
 import SidebarItem from "./sidebarItem.vue";
 import avatars from "/@/assets/avatars.jpg";
 import screenfull from "../screenfull/index.vue";
 import { useRoute, useRouter } from "vue-router";
-import { deviceDetection } from "@pureadmin/utils";
 import { watch, nextTick, onMounted, getCurrentInstance } from "vue";
 import { usePermissionStoreHook } from "/@/store/modules/permission";
 import globalization from "/@/assets/svg/globalization.svg?component";
@@ -99,7 +97,7 @@ function translationEn() {
       <!-- 通知 -->
       <Notice id="header-notice" />
       <!-- 全屏 -->
-      <screenfull id="header-screenfull" v-show="!deviceDetection()" />
+      <screenfull id="header-screenfull" />
       <!-- 国际化 -->
       <el-dropdown id="header-translation" trigger="click">
         <globalization

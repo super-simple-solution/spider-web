@@ -5,7 +5,6 @@ import svgLoader from "vite-svg-loader";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { viteMockServe } from "vite-plugin-mock";
 import VueI18n from "@intlify/vite-plugin-vue-i18n";
-import removeConsole from "vite-plugin-remove-console";
 import themePreprocessorPlugin from "@pureadmin/theme";
 import { genScssMultipleScopeVars } from "/@/layout/theme";
 import DefineOptions from "unplugin-vue-define-options/vite";
@@ -24,8 +23,6 @@ export function getPluginsList(command) {
     vueJsx(),
     Unocss(),
     DefineOptions(),
-    // 线上环境删除console
-    removeConsole({ external: ["src/assets/iconfont/iconfont.js"] }),
     // 自定义主题
     themePreprocessorPlugin({
       scss: {

@@ -5,7 +5,6 @@ import type {
   FunctionalComponent,
   PropType as VuePropType
 } from "vue";
-import type { ECharts } from "echarts";
 
 // GlobalComponents for Volar
 declare module "vue" {
@@ -110,7 +109,6 @@ declare global {
   }
 
   declare interface GlobalPropertiesApi {
-    $echarts: ECharts;
     $storage: ServerConfigs;
   }
 

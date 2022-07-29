@@ -2,7 +2,6 @@ import { getConfig } from "/@/config";
 import { find } from "lodash-unified";
 import { useLayout } from "./useLayout";
 import { themeColorsType } from "../types";
-import { TinyColor } from "@ctrl/tinycolor";
 import { ref, getCurrentInstance } from "vue";
 import { useAppStoreHook } from "/@/store/modules/app";
 import { useEpThemeStoreHook } from "/@/store/modules/epTheme";
@@ -61,18 +60,9 @@ export function useDataThemeChange() {
     }
   }
 
-  /**
-   * @description 自动计算hover和active颜色
-   * @see {@link https://element-plus.org/zh-CN/component/button.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%A2%9C%E8%89%B2}
-   */
-  const shadeBgColor = (color: string): string => {
-    return new TinyColor(color).shade(10).toString();
-  };
-
   /** 设置ep主题色 */
   const setEpThemeColor = (color: string) => {
     useEpThemeStoreHook().setEpThemeColor(color);
-    body.style.setProperty("--el-color-primary-active", shadeBgColor(color));
     document.documentElement.style.setProperty("--el-color-primary", color);
     for (let i = 1; i <= 9; i++) {
       document.documentElement.style.setProperty(

@@ -1,7 +1,6 @@
 import { reactive } from "vue";
 import { isPhone } from "@pureadmin/utils";
 import type { FormRules } from "element-plus";
-import { useUserStoreHook } from "/@/store/modules/user";
 
 /** 6位数字验证码正则 */
 export const REGEXP_SIX = /^\d{6}$/;
@@ -28,20 +27,6 @@ const loginRules = reactive(<FormRules>{
       },
       trigger: "blur"
     }
-  ],
-  verifyCode: [
-    {
-      validator: (rule, value, callback) => {
-        if (value === "") {
-          callback(new Error("请输入验证码"));
-        } else if (useUserStoreHook().verifyCode !== value) {
-          callback(new Error("请输入正确的验证码"));
-        } else {
-          callback();
-        }
-      },
-      trigger: "blur"
-    }
   ]
 });
 
@@ -60,20 +45,6 @@ const phoneRules = reactive(<FormRules>{
       },
       trigger: "blur"
     }
-  ],
-  verifyCode: [
-    {
-      validator: (rule, value, callback) => {
-        if (value === "") {
-          callback(new Error("请输入验证码"));
-        } else if (!REGEXP_SIX.test(value)) {
-          callback(new Error("请输入6位数字验证码"));
-        } else {
-          callback();
-        }
-      },
-      trigger: "blur"
-    }
   ]
 });
 
@@ -86,20 +57,6 @@ const updateRules = reactive(<FormRules>{
           callback(new Error("请输入手机号码"));
         } else if (!isPhone(value)) {
           callback(new Error("请输入正确的手机号码格式"));
-        } else {
-          callback();
-        }
-      },
-      trigger: "blur"
-    }
-  ],
-  verifyCode: [
-    {
-      validator: (rule, value, callback) => {
-        if (value === "") {
-          callback(new Error("请输入验证码"));
-        } else if (!REGEXP_SIX.test(value)) {
-          callback(new Error("请输入6位数字验证码"));
         } else {
           callback();
         }

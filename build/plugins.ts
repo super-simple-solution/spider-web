@@ -45,7 +45,6 @@ export function getPluginsList(command) {
       localEnabled: command === "serve",
       prodEnabled: command !== "serve" && prodMock,
       injectCode: `
-          import { setupProdMockServer } from './mockProdServer';
           setupProdMockServer();
         `,
       logger: false

@@ -15,7 +15,6 @@ specifiers:
   '@pureadmin/utils': ^0.0.33
   '@types/js-cookie': ^3.0.1
   '@types/lodash-es': ^4.17.6
-  '@types/mockjs': 1.0.3
   '@types/node': 14.14.14
   '@types/nprogress': 0.2.0
   '@typescript-eslint/eslint-plugin': ^5.10.2
@@ -36,7 +35,6 @@ specifiers:
   eslint: ^8.8.0
   eslint-plugin-prettier: ^4.0.0
   eslint-plugin-vue: ^8.4.1
-  font-awesome: ^4.7.0
   js-cookie: ^3.0.1
   lodash: ^4.17.21
   lodash-unified: ^1.0.2
@@ -66,7 +64,6 @@ specifiers:
   vue: ^3.2.37
   vue-eslint-parser: ^8.2.0
   vue-i18n: ^9.2.0-beta.39
-  vue-json-pretty: ^2.0.2
   vue-router: ^4.1.2
   vue-tsc: ^0.38.8
   vue-types: ^4.1.1
@@ -96,7 +93,6 @@ dependencies:
   responsive-storage: 2.0.0
   vue: 3.2.37
   vue-i18n: 9.2.0-beta.40_vue@3.2.37
-  vue-json-pretty: 2.1.1_vue@3.2.37
   vue-router: 4.1.2_vue@3.2.37
   vue-types: 4.1.1_vue@3.2.37
   vue-virtual-scroller: 2.0.0-alpha.1_vue@3.2.37
@@ -115,7 +111,6 @@ devDependencies:
   '@pureadmin/theme': 2.4.0
   '@types/js-cookie': 3.0.2
   '@types/lodash-es': 4.17.6
-  '@types/mockjs': 1.0.3
   '@types/node': 14.14.14
   '@types/nprogress': 0.2.0
   '@typescript-eslint/eslint-plugin': 5.30.7_6wltbjakwuqm7awqswigmiuhd4
@@ -128,7 +123,6 @@ devDependencies:
   eslint: 8.20.0
   eslint-plugin-prettier: 4.2.1_vvfpqh5kol6rhqy7beehv5uezq
   eslint-plugin-vue: 8.7.1_eslint@8.20.0
-  font-awesome: 4.7.0
   postcss: 8.4.14
   postcss-html: 1.5.0
   postcss-import: 14.0.0_postcss@8.4.14
@@ -833,10 +827,6 @@ packages:
 
   /@types/minimatch/3.0.5:
     resolution: {integrity: sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==}
-    dev: true
-
-  /@types/mockjs/1.0.3:
-    resolution: {integrity: sha512-OlwyyyoY81P8f7FU0zILUPxqQQ3/W+CwbqI6dWvOxaH8w948fAl1+hOG9C9ZgJcwzG+aloJcsastY4c4p91R1Q==}
     dev: true
 
   /@types/mockjs/1.0.6:
@@ -2885,11 +2875,6 @@ packages:
         optional: true
     dev: false
 
-  /font-awesome/4.7.0:
-    resolution: {integrity: sha512-U6kGnykA/6bFmg1M/oT9EkFeIYv7JlX3bozwQJWiiLz6L0w3F5vBVPxHlwyX/vtNq1ckcpRKOB9f2Qal/VtFpg==}
-    engines: {node: '>=0.10.3'}
-    dev: true
-
   /form-data/4.0.0:
     resolution: {integrity: sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==}
     engines: {node: '>= 6'}
@@ -4793,15 +4778,6 @@ packages:
       '@intlify/vue-devtools': 9.2.0-beta.40
       '@vue/devtools-api': 6.2.1
       vue: 3.2.37
-
-  /vue-json-pretty/2.1.1_vue@3.2.37:
-    resolution: {integrity: sha512-zl/gWr/zeQU4mUozlBxGu/9ebR/tYywty5VGu8FcHTJwOu9se4OwlPZELruwnzvHODfUOh8rUirSgNTHmLZXVw==}
-    engines: {node: '>= 10.0.0', npm: '>= 5.0.0'}
-    peerDependencies:
-      vue: '>=3.0.0'
-    dependencies:
-      vue: 3.2.37
-    dev: false
 
   /vue-observe-visibility/2.0.0-alpha.1_vue@3.2.37:
     resolution: {integrity: sha512-flFbp/gs9pZniXR6fans8smv1kDScJ8RS7rEpMjhVabiKeq7Qz3D9+eGsypncjfIyyU84saU88XZ0zjbD6Gq/g==}

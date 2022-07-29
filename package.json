@@ -37,7 +37,6 @@
     "responsive-storage": "^2.0.0",
     "vue": "^3.2.37",
     "vue-i18n": "^9.2.0-beta.39",
-    "vue-json-pretty": "^2.0.2",
     "vue-router": "^4.1.2",
     "vue-types": "^4.1.1",
     "vue-virtual-scroller": "^2.0.0-alpha.1"
@@ -56,7 +55,6 @@
     "@pureadmin/theme": "^2.4.0",
     "@types/js-cookie": "^3.0.1",
     "@types/lodash-es": "^4.17.6",
-    "@types/mockjs": "1.0.3",
     "@types/node": "14.14.14",
     "@types/nprogress": "0.2.0",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
@@ -69,7 +67,6 @@
     "eslint": "^8.8.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.4.1",
-    "font-awesome": "^4.7.0",
     "postcss": "^8.4.6",
     "postcss-html": "^1.3.0",
     "postcss-import": "14.0.0",

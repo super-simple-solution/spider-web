@@ -4,7 +4,7 @@ import { useRoute } from "vue-router";
 import { watch, getCurrentInstance } from "vue";
 
 export function useTranslationLang() {
-  const { changeTitle, changeWangeditorLanguage } = useNav();
+  const { changeTitle } = useNav();
   const { locale, t } = useI18n();
   const route = useRoute();
   const instance =
@@ -24,9 +24,6 @@ export function useTranslationLang() {
     () => locale.value,
     () => {
       changeTitle(route.meta);
-      locale.value === "en"
-        ? changeWangeditorLanguage(locale.value)
-        : changeWangeditorLanguage("zh-CN");
     }
   );
   return {

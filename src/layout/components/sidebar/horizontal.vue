@@ -31,8 +31,7 @@ const {
   username,
   avatarsStyle,
   getDropdownItemStyle,
-  getDropdownItemClass,
-  changeWangeditorLanguage
+  getDropdownItemClass
 } = useNav();
 
 onMounted(() => {
@@ -45,9 +44,6 @@ watch(
   () => locale.value,
   () => {
     changeTitle(route.meta);
-    locale.value === "en"
-      ? changeWangeditorLanguage(locale.value)
-      : changeWangeditorLanguage("zh-CN");
   }
 );
 
@@ -74,7 +70,6 @@ function translationEn() {
 <template>
   <div class="horizontal-header">
     <div class="horizontal-header-left" @click="backHome">
-      <FontIcon icon="team-iconlogo" svg style="width: 35px; height: 35px" />
       <h4>{{ title }}</h4>
     </div>
     <el-menu

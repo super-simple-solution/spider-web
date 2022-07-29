@@ -11,7 +11,6 @@ import { storageSession } from "@pureadmin/utils";
 import { useAppStoreHook } from "/@/store/modules/app";
 import { useEpThemeStoreHook } from "/@/store/modules/epTheme";
 import { useMultiTagsStoreHook } from "/@/store/modules/multiTags";
-import { i18nChangeLanguage } from "@wangeditor/editor";
 
 const errorInfo = "当前路由配置不正确，请检查配置";
 
@@ -119,15 +118,6 @@ export function useNav() {
     return remainingPaths.includes(path);
   }
 
-  /**
-   * 切换wangEditorV5国际化
-   * @param language string 可选值 en、zh-CN
-   * @returns void
-   */
-  function changeWangeditorLanguage(language: string): void {
-    i18nChangeLanguage(language);
-  }
-
   return {
     logout,
     backHome,
@@ -142,7 +132,6 @@ export function useNav() {
     username,
     avatarsStyle,
     getDropdownItemStyle,
-    getDropdownItemClass,
-    changeWangeditorLanguage
+    getDropdownItemClass
   };
 }

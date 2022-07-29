@@ -37,8 +37,7 @@ const {
   username,
   avatarsStyle,
   getDropdownItemStyle,
-  getDropdownItemClass,
-  changeWangeditorLanguage
+  getDropdownItemClass
 } = useNav();
 
 let defaultActive = ref(null);
@@ -64,9 +63,6 @@ watch(
   () => locale.value,
   () => {
     changeTitle(route.meta);
-    locale.value === "en"
-      ? changeWangeditorLanguage(locale.value)
-      : changeWangeditorLanguage("zh-CN");
   }
 );
 

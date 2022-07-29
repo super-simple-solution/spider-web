@@ -182,14 +182,14 @@ function resolvePath(routePath) {
               {{ transformI18n(onlyOneChild.meta.title) }}
             </span>
           </el-tooltip>
-          <FontIcon
+          <!-- <FontIcon
             v-if="onlyOneChild.meta.extraIcon"
             width="30px"
             height="30px"
             :style="getExtraIconStyle"
             :icon="onlyOneChild.meta.extraIcon.name"
             :svg="onlyOneChild.meta.extraIcon.svg ? true : false"
-          />
+          /> -->
         </div>
       </template>
     </el-menu-item>
@@ -218,14 +218,14 @@ function resolvePath(routePath) {
           </span>
         </div>
       </el-tooltip>
-      <FontIcon
+      <!-- <FontIcon
         v-if="props.item.meta.extraIcon"
         width="30px"
         height="30px"
         style="position: absolute; right: 10px"
         :icon="props.item.meta.extraIcon.name"
         :svg="props.item.meta.extraIcon.svg ? true : false"
-      />
+      /> -->
     </template>
     <sidebar-item
       v-for="child in props.item.children"

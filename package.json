@@ -24,7 +24,6 @@
     "element-plus": "^2.2.11",
     "element-resize-detector": "^1.2.3",
     "js-cookie": "^3.0.1",
-    "loadsh": "^0.0.4",
     "lodash": "^4.17.21",
     "lodash-unified": "^1.0.2",
     "mitt": "^3.0.0",

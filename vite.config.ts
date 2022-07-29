@@ -4,6 +4,8 @@ import pkg from "./package.json";
 import { warpperEnv, regExps } from "./build";
 import { getPluginsList } from "./build/plugins";
 import { UserConfigExport, ConfigEnv, loadEnv } from "vite";
+import tailwind from "tailwindcss";
+import autoprefixer from "autoprefixer";
 
 // 当前执行node命令时文件夹的地址（工作目录）
 const root: string = process.cwd();
@@ -71,6 +73,11 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     define: {
       __INTLIFY_PROD_DEVTOOLS__: false,
       __APP_INFO__: JSON.stringify(__APP_INFO__)
+    },
+    css: {
+      postcss: {
+        plugins: [tailwind(), autoprefixer()]
+      }
     }
   };
 };

@@ -9,7 +9,7 @@ import { MotionPlugin } from "@vueuse/motion";
 import VirtualScroller from "vue-virtual-scroller";
 import { injectResponsiveStorage } from "/@/utils/responsive";
 
-import "uno.css";
+// import "uno.css";
 import "animate.css";
 // 引入重置样式
 import "./style/reset.scss";

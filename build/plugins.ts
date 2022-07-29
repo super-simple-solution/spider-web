@@ -1,5 +1,4 @@
 import { resolve } from "path";
-import Unocss from "unocss/vite";
 import vue from "@vitejs/plugin-vue";
 import svgLoader from "vite-svg-loader";
 import vueJsx from "@vitejs/plugin-vue-jsx";
@@ -21,7 +20,6 @@ export function getPluginsList(command) {
     }),
     // jsx、tsx语法支持
     vueJsx(),
-    Unocss(),
     DefineOptions(),
     // 自定义主题
     themePreprocessorPlugin({

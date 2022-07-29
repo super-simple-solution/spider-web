@@ -4,6 +4,10 @@
 @import "./sidebar.scss";
 @import "./dark.scss";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --pure-transition-duration: 0.016s;
 }

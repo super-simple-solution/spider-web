@@ -7,7 +7,6 @@
     "mikestead.dotenv",
     "eamodio.gitlens",
     "antfu.iconify",
-    "antfu.unocss",
     "Vue.volar"
   ]
 }

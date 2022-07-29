@@ -7,10 +7,10 @@ import avatars from "/@/assets/avatars.jpg";
 import { transformI18n } from "/@/plugins/i18n";
 import screenfull from "../screenfull/index.vue";
 import { useRoute, useRouter } from "vue-router";
-import { useRenderIcon } from "/@/components/ReIcon/src/hooks";
 import { getParentPaths, findRouteByPath } from "/@/router/utils";
 import { usePermissionStoreHook } from "/@/store/modules/permission";
 import globalization from "/@/assets/svg/globalization.svg?component";
+import { Setting, Check } from "@element-plus/icons-vue";
 import {
   ref,
   toRaw,
@@ -109,20 +109,8 @@ function translationEn() {
           <div
             v-if="toRaw(route.meta.icon)"
             :class="['sub-menu-icon', route.meta.icon]"
-          >
-            <component
-              :is="useRenderIcon(route.meta && toRaw(route.meta.icon))"
-            />
-          </div>
-          <span class="select-none">{{ transformI18n(route.meta.title) }}</span>
-          <FontIcon
-            v-if="route.meta.extraIcon"
-            width="30px"
-            height="30px"
-            style="position: absolute; right: 10px"
-            :icon="route.meta.extraIcon.name"
-            :svg="route.meta.extraIcon.svg ? true : false"
           />
+          <span class="select-none">{{ transformI18n(route.meta.title) }}</span>
         </template>
       </el-menu-item>
     </el-menu>
@@ -146,7 +134,7 @@ function translationEn() {
               @click="translationCh"
             >
               <span class="check-zh" v-show="locale === 'zh'">
-                <IconifyIconOffline icon="check" />
+                <el-icon><Check /></el-icon>
               </span>
               简体中文
             </el-dropdown-item>
@@ -156,7 +144,7 @@ function translationEn() {
               @click="translationEn"
             >
               <span class="check-en" v-show="locale === 'en'">
-                <IconifyIconOffline icon="check" />
+                <el-icon><Check /></el-icon>
               </span>
               English
             </el-dropdown-item>
@@ -172,10 +160,6 @@ function translationEn() {
         <template #dropdown>
           <el-dropdown-menu class="logout">
             <el-dropdown-item @click="logout">
-              <IconifyIconOffline
-                icon="logout-circle-r-line"
-                style="margin: 5px"
-              />
               {{ t("buttons.hsLoginOut") }}
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -186,7 +170,7 @@ function translationEn() {
         :title="t('buttons.hssystemSet')"
         @click="onPanel"
       >
-        <IconifyIconOffline icon="setting" />
+        <el-icon><Setting /></el-icon>
       </span>
     </div>
   </div>

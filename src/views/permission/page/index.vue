@@ -2,7 +2,6 @@
 import { ref, unref } from "vue";
 import type { StorageConfigs } from "/#/index";
 import { storageSession } from "@pureadmin/utils";
-import { useRenderIcon } from "/@/components/ReIcon/src/hooks";
 
 defineOptions({
   name: "PermissionPage"
@@ -42,12 +41,6 @@ function changRole() {
         </span>
       </div>
     </template>
-    <el-button
-      type="primary"
-      @click="changRole"
-      :icon="useRenderIcon('user', { color: '#fff' })"
-    >
-      切换角色
-    </el-button>
+    <el-button type="primary" @click="changRole"> 切换角色 </el-button>
   </el-card>
 </template>

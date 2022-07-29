@@ -11,11 +11,7 @@ const { isFullscreen, toggle } = useFullscreen();
     class="screen-full w-36px flex align-center justify-center flex-ac cursor-pointer navbar-bg-hover"
     @click="toggle"
   >
-    <FontIcon
-      :title="
-        isFullscreen ? t('buttons.hsexitfullscreen') : t('buttons.hsfullscreen')
-      "
-      :icon="isFullscreen ? 'team-iconexit-fullscreen' : 'team-iconfullscreen'"
-    />
+    <template v-if="isFullscreen">{{ t("buttons.hsexitfullscreen") }}</template>
+    <template v-else>{{ t("buttons.hsfullscreen") }}</template>
   </div>
 </template>

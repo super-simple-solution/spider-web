@@ -4,7 +4,6 @@ import { useNav } from "../../hooks/nav";
 import { childrenType } from "../../types";
 import { transformI18n } from "/@/plugins/i18n";
 import { useAppStoreHook } from "/@/store/modules/app";
-import { useRenderIcon } from "/@/components/ReIcon/src/hooks";
 import { ref, toRaw, PropType, nextTick, computed, CSSProperties } from "vue";
 
 const { pureApp } = useNav();
@@ -148,16 +147,7 @@ function resolvePath(routePath) {
       :class="{ 'submenu-title-noDropdown': !isNest }"
       :style="getNoDropdownStyle"
     >
-      <div class="sub-menu-icon" v-if="toRaw(props.item.meta.icon)">
-        <component
-          :is="
-            useRenderIcon(
-              toRaw(onlyOneChild.meta.icon) ||
-                (props.item.meta && toRaw(props.item.meta.icon))
-            )
-          "
-        />
-      </div>
+      <div class="sub-menu-icon" v-if="toRaw(props.item.meta.icon)" />
       <div
         v-if="
           !pureApp.sidebar.opened &&
@@ -207,11 +197,7 @@ function resolvePath(routePath) {
 
   <el-sub-menu v-else ref="subMenu" :index="resolvePath(props.item.path)">
     <template #title>
-      <div v-if="toRaw(props.item.meta.icon)" class="sub-menu-icon">
-        <component
-          :is="useRenderIcon(props.item.meta && toRaw(props.item.meta.icon))"
-        />
-      </div>
+      <div v-if="toRaw(props.item.meta.icon)" class="sub-menu-icon" />
       <span v-if="!menuMode"> {{ transformI18n(props.item.meta.title) }}</span>
       <el-tooltip
         v-else

@@ -1,5 +1,3 @@
-import { IconifyIconOffline } from "/@/components/ReIcon";
-
 export function useColumns() {
   const lists = [
     { type: "", label: "善良" },
@@ -11,50 +9,22 @@ export function useColumns() {
 
   const columnsA = [
     {
-      labelRenderer: () => (
-        <div class="flex items-center">
-          <el-icon>
-            <IconifyIconOffline icon="user" />
-          </el-icon>
-          用户名
-        </div>
-      ),
+      labelRenderer: () => <div class="flex items-center">用户名</div>,
       value: "xiaoxian"
     },
     {
-      labelRenderer: () => (
-        <div class="flex items-center">
-          <el-icon>
-            <IconifyIconOffline icon="iphone" />
-          </el-icon>
-          手机号
-        </div>
-      ),
+      labelRenderer: () => <div class="flex items-center">手机号</div>,
       value: "123456789"
     },
     {
-      labelRenderer: () => (
-        <div class="flex items-center">
-          <el-icon>
-            <IconifyIconOffline icon="location" />
-          </el-icon>
-          居住地
-        </div>
-      ),
+      labelRenderer: () => <div class="flex items-center">居住地</div>,
       value: "上海"
     }
   ];
 
   const columnsB = [
     {
-      labelRenderer: () => (
-        <div class="flex items-center">
-          <el-icon>
-            <IconifyIconOffline icon="tickets" />
-          </el-icon>
-          标签
-        </div>
-      ),
+      labelRenderer: () => <div class="flex items-center">标签</div>,
       cellRenderer: () => {
         return lists.map(v => {
           return (
@@ -66,14 +36,7 @@ export function useColumns() {
       }
     },
     {
-      labelRenderer: () => (
-        <div class="flex items-center">
-          <el-icon>
-            <IconifyIconOffline icon="office-building" />
-          </el-icon>
-          联系地址
-        </div>
-      ),
+      labelRenderer: () => <div class="flex items-center">联系地址</div>,
       value: "上海市徐汇区"
     }
   ];
@@ -81,12 +44,7 @@ export function useColumns() {
   const columnsC = [
     {
       labelRenderer: () => (
-        <div class="flex items-center">
-          <el-icon>
-            <IconifyIconOffline icon="notebook" />
-          </el-icon>
-          好好学习，天天向上
-        </div>
+        <div class="flex items-center">好好学习，天天向上</div>
       ),
       value: "上海市徐汇区"
     }

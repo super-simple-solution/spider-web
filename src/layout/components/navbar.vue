@@ -8,6 +8,7 @@ import { deviceDetection } from "@pureadmin/utils";
 import screenfull from "../components/screenfull/index.vue";
 import { useTranslationLang } from "../hooks/useTranslationLang";
 import globalization from "/@/assets/svg/globalization.svg?component";
+import { Setting } from "@element-plus/icons-vue";
 
 const {
   logout,
@@ -47,11 +48,6 @@ const { t, locale, translationCh, translationEn } = useTranslationLang();
               :class="['!dark:color-white', getDropdownItemClass(locale, 'zh')]"
               @click="translationCh"
             >
-              <IconifyIconOffline
-                class="check-zh"
-                v-show="locale === 'zh'"
-                icon="check"
-              />
               简体中文
             </el-dropdown-item>
             <el-dropdown-item
@@ -59,9 +55,6 @@ const { t, locale, translationCh, translationEn } = useTranslationLang();
               :class="['!dark:color-white', getDropdownItemClass(locale, 'en')]"
               @click="translationEn"
             >
-              <span class="check-en" v-show="locale === 'en'">
-                <IconifyIconOffline icon="check" />
-              </span>
               English
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -76,10 +69,6 @@ const { t, locale, translationCh, translationEn } = useTranslationLang();
         <template #dropdown>
           <el-dropdown-menu class="logout">
             <el-dropdown-item @click="logout">
-              <IconifyIconOffline
-                icon="logout-circle-r-line"
-                style="margin: 5px"
-              />
               {{ t("buttons.hsLoginOut") }}
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -90,7 +79,7 @@ const { t, locale, translationCh, translationEn } = useTranslationLang();
         :title="t('buttons.hssystemSet')"
         @click="onPanel"
       >
-        <IconifyIconOffline icon="setting" />
+        <el-icon><Setting /></el-icon>
       </span>
     </div>
   </div>

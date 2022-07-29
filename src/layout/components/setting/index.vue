@@ -286,7 +286,7 @@ nextTick(() => {
           :size="17"
           :color="getThemeColor(item.themeColor)"
         >
-          <IconifyIconOffline icon="check" />
+          <el-icon><Check /></el-icon>
         </el-icon>
       </li>
     </ul>
@@ -366,12 +366,6 @@ nextTick(() => {
       style="width: 90%; margin: 24px 15px"
       @click="onReset"
     >
-      <IconifyIconOffline
-        icon="fa-sign-out"
-        width="15"
-        height="15"
-        style="margin-right: 4px"
-      />
       清空缓存并返回登录页
     </el-button>
   </panel>

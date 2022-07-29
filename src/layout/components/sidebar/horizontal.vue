@@ -10,6 +10,7 @@ import { useRoute, useRouter } from "vue-router";
 import { watch, nextTick, onMounted, getCurrentInstance } from "vue";
 import { usePermissionStoreHook } from "/@/store/modules/permission";
 import globalization from "/@/assets/svg/globalization.svg?component";
+import { Setting, Check } from "@element-plus/icons-vue";
 
 const route = useRoute();
 const { locale, t } = useI18n();
@@ -111,7 +112,7 @@ function translationEn() {
               @click="translationCh"
             >
               <span class="check-zh" v-show="locale === 'zh'">
-                <IconifyIconOffline icon="check" />
+                <el-icon><Check /></el-icon>
               </span>
               简体中文
             </el-dropdown-item>
@@ -121,7 +122,7 @@ function translationEn() {
               @click="translationEn"
             >
               <span class="check-en" v-show="locale === 'en'">
-                <IconifyIconOffline icon="check" />
+                <el-icon><Check /></el-icon>
               </span>
               English
             </el-dropdown-item>
@@ -137,10 +138,6 @@ function translationEn() {
         <template #dropdown>
           <el-dropdown-menu class="logout">
             <el-dropdown-item @click="logout">
-              <IconifyIconOffline
-                icon="logout-circle-r-line"
-                style="margin: 5px"
-              />
               {{ t("buttons.hsLoginOut") }}
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -151,7 +148,7 @@ function translationEn() {
         :title="t('buttons.hssystemSet')"
         @click="onPanel"
       >
-        <IconifyIconOffline icon="setting" />
+        <el-icon><Setting /></el-icon>
       </span>
     </div>
   </div>

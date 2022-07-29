@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { onClickOutside } from "@vueuse/core";
 import { emitter } from "/@/utils/mitt";
+import { Close } from "@element-plus/icons-vue";
 
 let show = ref<Boolean>(false);
 const target = ref(null);
@@ -23,7 +24,7 @@ emitter.on("openPanel", () => {
         <div class="project-configuration">
           <h3>项目配置</h3>
           <el-icon title="关闭配置" class="el-icon-close" @click="show = !show">
-            <IconifyIconOffline icon="close" />
+            <Close />
           </el-icon>
         </div>
         <div class="border-b-1 border-[#dcdfe6] dark:border-[#303030]" />

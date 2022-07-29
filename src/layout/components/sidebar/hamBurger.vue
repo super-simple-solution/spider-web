@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Fold, Expand } from "@element-plus/icons-vue";
 import { ref } from "vue";
 
 interface Props {
@@ -26,11 +27,18 @@ const toggleClick = () => {
       :effect="isDark ? 'dark' : 'light'"
       :content="props.isActive ? '点击折叠' : '点击展开'"
     >
-      <IconifyIconOffline
-        :icon="props.isActive ? 'menu-fold' : 'menu-unfold'"
-        class="cursor-pointer inline-block align-middle color-primary hover:color-primary !dark:hover:color-white w-16px h-16px ml-4 mb-1"
+      <el-icon
+        v-if="props.isActive"
         @click="toggleClick"
-      />
+        class="cursor-pointer inline-block align-middle color-primary hover:color-primary !dark:hover:color-white w-16px h-16px ml-4 mb-1"
+        ><Fold
+      /></el-icon>
+      <el-icon
+        v-else
+        @click="toggleClick"
+        class="cursor-pointer inline-block align-middle color-primary hover:color-primary !dark:hover:color-white w-16px h-16px ml-4 mb-1"
+        ><Expand
+      /></el-icon>
     </el-tooltip>
   </div>
 </template>

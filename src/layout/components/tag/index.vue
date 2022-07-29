@@ -20,6 +20,14 @@ import closeLeft from "/@/assets/svg/close_left.svg?component";
 import closeOther from "/@/assets/svg/close_other.svg?component";
 import closeRight from "/@/assets/svg/close_right.svg?component";
 
+import {
+  ArrowRight,
+  ArrowLeft,
+  CloseBold,
+  RefreshRight,
+  ArrowDown
+} from "@element-plus/icons-vue";
+
 import { useI18n } from "vue-i18n";
 import { emitter } from "/@/utils/mitt";
 import type { StorageConfigs } from "/#/index";
@@ -645,7 +653,7 @@ const getContextMenuStyle = computed((): CSSProperties => {
 <template>
   <div ref="containerDom" class="tags-view" v-if="!showTags">
     <div class="arrow-left">
-      <IconifyIconOffline icon="arrow-left-s-line" @click="handleScroll(200)" />
+      <el-icon @click="handleScroll(200)"><ArrowLeft /></el-icon>
     </div>
     <div ref="scrollbarDom" class="scroll-container">
       <div class="tab" ref="tabDom" :style="getTabStyle">
@@ -679,7 +687,7 @@ const getContextMenuStyle = computed((): CSSProperties => {
             class="el-icon-close"
             @click.stop="deleteMenu(item)"
           >
-            <IconifyIconOffline icon="close-bold" />
+            <el-icon @click="handleScroll(-200)"><CloseBold /></el-icon>
           </span>
           <div
             :ref="'schedule' + index"
@@ -690,10 +698,7 @@ const getContextMenuStyle = computed((): CSSProperties => {
       </div>
     </div>
     <span class="arrow-right">
-      <IconifyIconOffline
-        icon="arrow-right-s-line"
-        @click="handleScroll(-200)"
-      />
+      <el-icon @click="handleScroll(-200)"><ArrowRight /></el-icon>
     </span>
     <!-- 右键菜单按钮 -->
     <transition name="el-zoom-in-top">
@@ -723,7 +728,7 @@ const getContextMenuStyle = computed((): CSSProperties => {
           class="el-icon-refresh-right rotate"
           @click="onFresh"
         >
-          <IconifyIconOffline icon="refresh-right" />
+          <el-icon><RefreshRight /></el-icon>
         </span>
       </li>
       <li>
@@ -732,7 +737,7 @@ const getContextMenuStyle = computed((): CSSProperties => {
           placement="bottom-end"
           @command="handleCommand"
         >
-          <IconifyIconOffline icon="arrow-down" class="dark:color-white" />
+          <el-icon class="dark:color-white"><ArrowDown /></el-icon>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item

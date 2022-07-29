@@ -6,7 +6,7 @@ const errorRouter = {
   component: Layout,
   redirect: "/error/403",
   meta: {
-    icon: "information-line",
+    icon: "InfoFilled",
     title: $t("menus.hserror"),
     rank: 9
   },

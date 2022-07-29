@@ -10,7 +10,6 @@ import { storageSession } from "@pureadmin/utils";
 import { useLayout } from "/@/layout/hooks/useLayout";
 import { useUserStoreHook } from "/@/store/modules/user";
 import { bg, avatar, currentWeek } from "./utils/static";
-import { useRenderIcon } from "/@/components/ReIcon/src/hooks";
 import { useTranslationLang } from "/@/layout/hooks/useTranslationLang";
 import { useDataThemeChange } from "/@/layout/hooks/useDataThemeChange";
 import { ref, reactive, computed, getCurrentInstance } from "vue";
@@ -18,6 +17,7 @@ import { ref, reactive, computed, getCurrentInstance } from "vue";
 import dayIcon from "/@/assets/svg/day.svg?component";
 import darkIcon from "/@/assets/svg/dark.svg?component";
 import globalization from "/@/assets/svg/globalization.svg?component";
+import { Check } from "@element-plus/icons-vue";
 
 defineOptions({
   name: "Login"
@@ -93,11 +93,9 @@ dataThemeChange();
               :class="['!dark:color-white', getDropdownItemClass(locale, 'zh')]"
               @click="translationCh"
             >
-              <IconifyIconOffline
-                class="check-zh"
-                v-show="locale === 'zh'"
-                icon="check"
-              />
+              <el-icon class="check-zh" v-show="locale === 'zh'">
+                <Check />
+              </el-icon>
               简体中文
             </el-dropdown-item>
             <el-dropdown-item
@@ -105,9 +103,9 @@ dataThemeChange();
               :class="['!dark:color-white', getDropdownItemClass(locale, 'en')]"
               @click="translationEn"
             >
-              <span class="check-en" v-show="locale === 'en'">
-                <IconifyIconOffline icon="check" />
-              </span>
+              <el-icon class="check-en" v-show="locale === 'en'">
+                <Check />
+              </el-icon>
               English
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -139,7 +137,6 @@ dataThemeChange();
                   clearable
                   v-model="ruleForm.username"
                   placeholder="账号"
-                  :prefix-icon="useRenderIcon('user')"
                 />
               </el-form-item>
             </Motion>
@@ -151,7 +148,6 @@ dataThemeChange();
                   show-password
                   v-model="ruleForm.password"
                   placeholder="密码"
-                  :prefix-icon="useRenderIcon('lock')"
                 />
               </el-form-item>
             </Motion>

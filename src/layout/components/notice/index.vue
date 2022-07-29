@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { noticesData } from "./data";
 import NoticeList from "./noticeList.vue";
+import { Bell } from "@element-plus/icons-vue";
 
 const activeName = ref(noticesData[0].name);
 const notices = ref(noticesData);
@@ -22,7 +23,7 @@ function tabClick() {
     <span class="dropdown-badge navbar-bg-hover select-none">
       <el-badge :value="noticesNum" :max="99">
         <span class="header-notice-icon">
-          <IconifyIconOffline icon="bell" />
+          <Bell style="width: 1em; height: 1em" />
         </span>
       </el-badge>
     </span>

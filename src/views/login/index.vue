@@ -3,21 +3,13 @@ import Motion from "./utils/motion";
 import { useRouter } from "vue-router";
 import { loginRules } from "./utils/rule";
 import { initRouter } from "/@/router/utils";
-import { useNav } from "/@/layout/hooks/nav";
 import { ElMessage } from "element-plus";
 import type { FormInstance } from "element-plus";
 import { storageSession } from "@pureadmin/utils";
 import { useLayout } from "/@/layout/hooks/useLayout";
 import { useUserStoreHook } from "/@/store/modules/user";
 import { bg, avatar, currentWeek } from "./utils/static";
-import { useTranslationLang } from "/@/layout/hooks/useTranslationLang";
-import { useDataThemeChange } from "/@/layout/hooks/useDataThemeChange";
 import { ref, reactive, computed, getCurrentInstance } from "vue";
-
-import dayIcon from "/@/assets/svg/day.svg?component";
-import darkIcon from "/@/assets/svg/dark.svg?component";
-import globalization from "/@/assets/svg/globalization.svg?component";
-import { Check } from "@element-plus/icons-vue";
 
 defineOptions({
   name: "Login"
@@ -33,10 +25,6 @@ const currentPage = computed(() => {
 
 const { initStorage } = useLayout();
 initStorage();
-
-const { dataTheme, dataThemeChange } = useDataThemeChange();
-const { getDropdownItemStyle, getDropdownItemClass } = useNav();
-const { locale, translationCh, translationEn } = useTranslationLang();
 
 const ruleForm = reactive({
   username: "admin",
@@ -65,53 +53,11 @@ const onLogin = async (formEl: FormInstance | undefined) => {
     }
   });
 };
-
-dataThemeChange();
 </script>
 
 <template>
   <div class="wh-full select-none">
     <img :src="bg" class="wave" />
-    <div class="flex-c absolute right-5 top-3">
-      <!-- 主题 -->
-      <el-switch
-        v-model="dataTheme"
-        inline-prompt
-        :active-icon="dayIcon"
-        :inactive-icon="darkIcon"
-        @change="dataThemeChange"
-      />
-      <!-- 国际化 -->
-      <el-dropdown trigger="click">
-        <globalization
-          class="hover:color-primary !hover:bg-transparent w-20px h-20px ml-1.5 cursor-pointer outline-none duration-300"
-        />
-        <template #dropdown>
-          <el-dropdown-menu class="translation">
-            <el-dropdown-item
-              :style="getDropdownItemStyle(locale, 'zh')"
-              :class="['!dark:color-white', getDropdownItemClass(locale, 'zh')]"
-              @click="translationCh"
-            >
-              <el-icon class="check-zh" v-show="locale === 'zh'">
-                <Check />
-              </el-icon>
-              简体中文
-            </el-dropdown-item>
-            <el-dropdown-item
-              :style="getDropdownItemStyle(locale, 'en')"
-              :class="['!dark:color-white', getDropdownItemClass(locale, 'en')]"
-              @click="translationEn"
-            >
-              <el-icon class="check-en" v-show="locale === 'en'">
-                <Check />
-              </el-icon>
-              English
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-    </div>
     <div class="login-container">
       <div class="img">
         <component :is="currentWeek" />

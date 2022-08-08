@@ -24,7 +24,6 @@ import {
   ArrowRight,
   ArrowLeft,
   CloseBold,
-  RefreshRight,
   ArrowDown
 } from "@element-plus/icons-vue";
 
@@ -41,19 +40,13 @@ import { handleAliveRoute, delAliveRoutes } from "/@/router/utils";
 import { useMultiTagsStoreHook } from "/@/store/modules/multiTags";
 import { usePermissionStoreHook } from "/@/store/modules/permission";
 import { templateRef, useResizeObserver, useDebounceFn } from "@vueuse/core";
-import {
-  toggleClass,
-  removeClass,
-  hasClass,
-  storageLocal
-} from "@pureadmin/utils";
+import { toggleClass, hasClass, storageLocal } from "@pureadmin/utils";
 
 const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
 const translateX = ref<number>(0);
 const activeIndex = ref<number>(-1);
-let refreshButton = "refresh-button";
 const instance = getCurrentInstance();
 const pureSetting = useSettingStoreHook();
 const tabDom = templateRef<HTMLElement | null>("tabDom", null);
@@ -301,19 +294,6 @@ function dynamicRouteTag(value: string, parentPath: string): void {
   concatPath(router.options.routes, value, parentPath);
 }
 
-// 重新加载
-function onFresh() {
-  toggleClass(true, refreshButton, document.querySelector(".rotate"));
-  const { fullPath, query } = unref(route);
-  router.replace({
-    path: "/redirect" + fullPath,
-    query: query
-  });
-  setTimeout(() => {
-    removeClass(document.querySelector(".rotate"), refreshButton);
-  }, 600);
-}
-
 function deleteDynamicTag(obj: any, current: any, tag?: string) {
   // 存放被删除的缓存路由
   let delAliveRouteList = [];
@@ -403,10 +383,6 @@ function onClickDrop(key, item, selectRoute?: RouteConfigs) {
 
   // 当前路由信息
   switch (key) {
-    case 0:
-      // 重新加载
-      onFresh();
-      break;
     case 1:
       // 关闭当前标签页
       deleteMenu(selectTagRoute);
@@ -722,15 +698,6 @@ const getContextMenuStyle = computed((): CSSProperties => {
     </transition>
     <!-- 右侧功能按钮 -->
     <ul class="right-button">
-      <li>
-        <span
-          :title="t('buttons.hsrefreshRoute')"
-          class="el-icon-refresh-right rotate"
-          @click="onFresh"
-        >
-          <el-icon><RefreshRight /></el-icon>
-        </span>
-      </li>
       <li>
         <el-dropdown
           trigger="click"

@@ -8,11 +8,6 @@
     "preview": "vite preview",
     "lint": "eslint --fix --ext .js,.vue ."
   },
-  "browserslist": [
-    "> 1%",
-    "not ie 11",
-    "not op_mini all"
-  ],
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.6",
     "@pureadmin/utils": "^0.0.33",

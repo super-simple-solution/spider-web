@@ -4,20 +4,14 @@ import { emitter } from "/@/utils/mitt";
 import { useLayout } from "./hooks/useLayout";
 import { useAppStoreHook } from "/@/store/modules/app";
 import { useSettingStoreHook } from "/@/store/modules/settings";
-import { h, ref, reactive, computed, defineComponent } from "vue";
-
-import backTop from "/@/assets/svg/back_top.svg?component";
-import fullScreen from "/@/assets/svg/full_screen.svg?component";
-import exitScreen from "/@/assets/svg/exit_screen.svg?component";
+import { h, reactive, computed, defineComponent } from "vue";
 
 import navbar from "./components/navbar.vue";
 import tag from "./components/tag/index.vue";
 import appMain from "./components/appMain.vue";
-import setting from "./components/setting/index.vue";
 import Vertical from "./components/sidebar/vertical.vue";
 import Horizontal from "./components/sidebar/horizontal.vue";
 
-const isDark = ref(true);
 const pureSetting = useSettingStoreHook();
 
 const { instance, layout } = useLayout();
@@ -93,25 +87,12 @@ emitter.on("resize", ({ detail }) => {
   }
 });
 
-function onFullScreen() {
-  pureSetting.hiddenSideBar
-    ? pureSetting.changeSetting({ key: "hiddenSideBar", value: false })
-    : pureSetting.changeSetting({ key: "hiddenSideBar", value: true });
-}
-
 const layoutHeader = defineComponent({
   render() {
     return h(
       "div",
       {
-        class: { "fixed-header": set.fixedHeader },
-        style: [
-          set.hideTabs && layout.value.includes("horizontal")
-            ? isDark.value
-              ? "box-shadow: 0 1px 4px #0d0d0d"
-              : "box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08)"
-            : ""
-        ]
+        class: { "fixed-header": set.fixedHeader }
       },
       {
         default: () => [
@@ -122,27 +103,7 @@ const layoutHeader = defineComponent({
           !pureSetting.hiddenSideBar && layout.value.includes("horizontal")
             ? h(Horizontal)
             : h("div"),
-          h(
-            tag,
-            {},
-            {
-              default: () => [
-                h(
-                  "span",
-                  {
-                    onClick: onFullScreen
-                  },
-                  {
-                    default: () => [
-                      !pureSetting.hiddenSideBar
-                        ? h(fullScreen, { class: "dark:color-white" })
-                        : h(exitScreen, { class: "dark:color-white" })
-                    ]
-                  }
-                )
-              ]
-            }
-          )
+          h(tag, {})
         ]
       }
     );
@@ -179,19 +140,11 @@ const layoutHeader = defineComponent({
         <app-main :fixed-header="set.fixedHeader" />
       </div>
       <el-scrollbar v-else>
-        <el-backtop
-          title="回到顶部"
-          target=".main-container .el-scrollbar__wrap"
-        >
-          <backTop />
-        </el-backtop>
         <layout-header />
         <!-- 主体内容 -->
         <app-main :fixed-header="set.fixedHeader" />
       </el-scrollbar>
     </div>
-    <!-- 系统设置 -->
-    <setting />
   </div>
 </template>
 

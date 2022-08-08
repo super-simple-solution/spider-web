@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
-import Notice from "../notice/index.vue";
+// import Notice from "../notice/index.vue";
 import { useNav } from "../../hooks/nav";
 import { templateRef } from "@vueuse/core";
 import avatars from "/@/assets/avatars.jpg";
 import { transformI18n } from "/@/plugins/i18n";
-import screenfull from "../screenfull/index.vue";
+// import screenfull from "../screenfull/index.vue";
 import { useRoute, useRouter } from "vue-router";
 import { getParentPaths, findRouteByPath } from "/@/router/utils";
 import { usePermissionStoreHook } from "/@/store/modules/permission";
@@ -114,9 +114,9 @@ function translationEn() {
       <!-- 菜单搜索 -->
       <Search />
       <!-- 通知 -->
-      <Notice id="header-notice" />
+      <!-- <Notice id="header-notice" /> -->
       <!-- 全屏 -->
-      <screenfull id="header-screenfull" />
+      <!-- <screenfull id="header-screenfull" /> -->
       <!-- 国际化 -->
       <el-dropdown id="header-translation" trigger="click">
         <globalization

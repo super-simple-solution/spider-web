@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useNav } from "../hooks/nav";
-import Notice from "./notice/index.vue";
+// import Notice from "./notice/index.vue";
 import mixNav from "./sidebar/mixNav.vue";
 import avatars from "/@/assets/avatars.jpg";
 import Breadcrumb from "./sidebar/breadCrumb.vue";

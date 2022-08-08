@@ -3,7 +3,6 @@ import path from "path";
 import { useNav } from "../../hooks/nav";
 import { childrenType } from "../../types";
 import { transformI18n } from "/@/plugins/i18n";
-import { useAppStoreHook } from "/@/store/modules/app";
 import { ref, toRaw, PropType, nextTick, computed, CSSProperties } from "vue";
 
 const { pureApp } = useNav();
@@ -20,19 +19,6 @@ const props = defineProps({
   basePath: {
     type: String,
     default: ""
-  }
-});
-
-const getExtraIconStyle = computed((): CSSProperties => {
-  if (useAppStoreHook().getSidebarStatus) {
-    return {
-      position: "absolute",
-      right: "10px"
-    };
-  } else {
-    return {
-      position: "static"
-    };
   }
 });
 
@@ -182,14 +168,6 @@ function resolvePath(routePath) {
               {{ transformI18n(onlyOneChild.meta.title) }}
             </span>
           </el-tooltip>
-          <!-- <FontIcon
-            v-if="onlyOneChild.meta.extraIcon"
-            width="30px"
-            height="30px"
-            :style="getExtraIconStyle"
-            :icon="onlyOneChild.meta.extraIcon.name"
-            :svg="onlyOneChild.meta.extraIcon.svg ? true : false"
-          /> -->
         </div>
       </template>
     </el-menu-item>

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
 import { useNav } from "../../hooks/nav";
-import Notice from "../notice/index.vue";
 import { templateRef } from "@vueuse/core";
 import SidebarItem from "./sidebarItem.vue";
 import avatars from "/@/assets/avatars.jpg";
@@ -29,7 +28,6 @@ const {
   handleResize,
   menuSelect,
   username,
-  avatarsStyle,
   getDropdownItemStyle,
   getDropdownItemClass
 } = useNav();
@@ -127,7 +125,7 @@ function translationEn() {
       <!-- 退出登录 -->
       <el-dropdown trigger="click">
         <span class="el-dropdown-link navbar-bg-hover">
-          <img v-if="avatars" :src="avatars" :style="avatarsStyle" />
+          <img v-if="avatars" :src="avatars" />
           <p v-if="username" class="dark:color-white">{{ username }}</p>
         </span>
         <template #dropdown>

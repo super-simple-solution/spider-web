@@ -1,86 +1,29 @@
 <script setup lang="ts">
 import { useNav } from "../hooks/nav";
-// import Notice from "./notice/index.vue";
-import mixNav from "./sidebar/mixNav.vue";
 import avatars from "/@/assets/avatars.jpg";
 import Breadcrumb from "./sidebar/breadCrumb.vue";
-import { deviceDetection } from "@pureadmin/utils";
-import screenfull from "../components/screenfull/index.vue";
-import { useTranslationLang } from "../hooks/useTranslationLang";
-import globalization from "/@/assets/svg/globalization.svg?component";
-import { Setting } from "@element-plus/icons-vue";
 
-const {
-  logout,
-  onPanel,
-  pureApp,
-  username,
-  avatarsStyle,
-  getDropdownItemStyle,
-  getDropdownItemClass
-} = useNav();
-
-const { t, locale, translationCh, translationEn } = useTranslationLang();
+const { logout, username } = useNav();
 </script>
 
 <template>
   <div
     class="navbar bg-[#fff] shadow-sm shadow-[rgba(0, 21, 41, 0.08)] dark:shadow-[#0d0d0d]"
   >
-    <Breadcrumb v-if="pureApp.layout !== 'mix'" class="breadcrumb-container" />
-
-    <mixNav v-if="pureApp.layout === 'mix'" />
-
-    <div v-if="pureApp.layout === 'vertical'" class="vertical-header-right">
-      <!-- 通知 -->
-      <Notice id="header-notice" />
-      <!-- 全屏 -->
-      <screenfull id="header-screenfull" v-show="!deviceDetection()" />
-      <!-- 国际化 -->
-      <el-dropdown id="header-translation" trigger="click">
-        <globalization
-          class="navbar-bg-hover w-40px h-48px p-11px cursor-pointer outline-none"
-        />
-        <template #dropdown>
-          <el-dropdown-menu class="translation">
-            <el-dropdown-item
-              :style="getDropdownItemStyle(locale, 'zh')"
-              :class="['!dark:color-white', getDropdownItemClass(locale, 'zh')]"
-              @click="translationCh"
-            >
-              简体中文
-            </el-dropdown-item>
-            <el-dropdown-item
-              :style="getDropdownItemStyle(locale, 'en')"
-              :class="['!dark:color-white', getDropdownItemClass(locale, 'en')]"
-              @click="translationEn"
-            >
-              English
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
+    <Breadcrumb class="breadcrumb-container" />
+    <div class="vertical-header-right">
       <!-- 退出登录 -->
       <el-dropdown trigger="click">
         <span class="el-dropdown-link navbar-bg-hover">
-          <img v-if="avatars" :src="avatars" :style="avatarsStyle" />
+          <img v-if="avatars" :src="avatars" />
           <p v-if="username" class="dark:color-white">{{ username }}</p>
         </span>
         <template #dropdown>
           <el-dropdown-menu class="logout">
-            <el-dropdown-item @click="logout">
-              {{ t("buttons.hsLoginOut") }}
-            </el-dropdown-item>
+            <el-dropdown-item @click="logout"> 退出系统 </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-      <span
-        class="el-icon-setting navbar-bg-hover"
-        :title="t('buttons.hssystemSet')"
-        @click="onPanel"
-      >
-        <el-icon><Setting /></el-icon>
-      </span>
     </div>
   </div>
 </template>
@@ -118,36 +61,11 @@ const { t, locale, translationCh, translationEn } = useTranslationLang();
         border-radius: 50%;
       }
     }
-
-    .el-icon-setting {
-      height: 48px;
-      width: 38px;
-      padding: 12px;
-      display: flex;
-      cursor: pointer;
-      align-items: center;
-    }
   }
 
   .breadcrumb-container {
     float: left;
     margin-left: 16px;
-  }
-}
-
-.translation {
-  ::v-deep(.el-dropdown-menu__item) {
-    padding: 5px 40px;
-  }
-
-  .check-zh {
-    position: absolute;
-    left: 20px;
-  }
-
-  .check-en {
-    position: absolute;
-    left: 20px;
   }
 }
 

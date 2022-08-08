@@ -67,15 +67,6 @@
     "vue-eslint-parser": "^8.2.0",
     "vue-tsc": "^0.38.8"
   },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "rollup",
-        "terser",
-        "webpack"
-      ]
-    }
-  },
   "repository": "git@github.com:super-simple-solution/spider-web.git",
   "author": "wudaxue",
   "license": "MIT"

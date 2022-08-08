@@ -20,25 +20,19 @@ import closeLeft from "/@/assets/svg/close_left.svg?component";
 import closeOther from "/@/assets/svg/close_other.svg?component";
 import closeRight from "/@/assets/svg/close_right.svg?component";
 
-import {
-  ArrowRight,
-  ArrowLeft,
-  CloseBold,
-  ArrowDown
-} from "@element-plus/icons-vue";
+import { ArrowRight, ArrowLeft, CloseBold } from "@element-plus/icons-vue";
 
 import { useI18n } from "vue-i18n";
 import { emitter } from "/@/utils/mitt";
 import type { StorageConfigs } from "/#/index";
 import { routerArrays } from "/@/layout/types";
 import { useRoute, useRouter } from "vue-router";
-import { isEqual, isEmpty } from "lodash-unified";
-import { transformI18n, $t } from "/@/plugins/i18n";
+import { isEqual } from "lodash-unified";
+import { $t } from "/@/plugins/i18n";
 import { RouteConfigs, tagsViewsType } from "../../types";
 import { useSettingStoreHook } from "/@/store/modules/settings";
 import { handleAliveRoute, delAliveRoutes } from "/@/router/utils";
 import { useMultiTagsStoreHook } from "/@/store/modules/multiTags";
-import { usePermissionStoreHook } from "/@/store/modules/permission";
 import { templateRef, useResizeObserver, useDebounceFn } from "@vueuse/core";
 import { toggleClass, hasClass, storageLocal } from "@pureadmin/utils";
 
@@ -366,65 +360,6 @@ function deleteMenu(item, tag?: string) {
   deleteDynamicTag(item, item.path, tag);
 }
 
-function onClickDrop(key, item, selectRoute?: RouteConfigs) {
-  if (item && item.disabled) return;
-
-  let selectTagRoute;
-  if (selectRoute) {
-    selectTagRoute = {
-      path: selectRoute.path,
-      meta: selectRoute.meta,
-      name: selectRoute.name,
-      query: selectRoute.query
-    };
-  } else {
-    selectTagRoute = { path: route.path, meta: route.meta };
-  }
-
-  // 当前路由信息
-  switch (key) {
-    case 1:
-      // 关闭当前标签页
-      deleteMenu(selectTagRoute);
-      break;
-    case 2:
-      // 关闭左侧标签页
-      deleteMenu(selectTagRoute, "left");
-      break;
-    case 3:
-      // 关闭右侧标签页
-      deleteMenu(selectTagRoute, "right");
-      break;
-    case 4:
-      // 关闭其他标签页
-      deleteMenu(selectTagRoute, "other");
-      break;
-    case 5:
-      // 关闭全部标签页
-      useMultiTagsStoreHook().handleTags("splice", "", {
-        startIndex: 1,
-        length: multiTags.value.length
-      });
-      usePermissionStoreHook().clearAllCachePage();
-      router.push("/welcome");
-      break;
-  }
-  setTimeout(() => {
-    showMenuModel(route.fullPath, route.query);
-  });
-}
-
-function handleCommand(command: object) {
-  // @ts-expect-error
-  const { key, item } = command;
-  onClickDrop(key, item);
-}
-
-// 触发右键中菜单的点击事件
-function selectTag(key, item) {
-  onClickDrop(key, item, currentSelect.value);
-}
-
 function closeMenu() {
   visible.value = false;
 }
@@ -433,66 +368,6 @@ function showMenus(value: boolean) {
   Array.of(1, 2, 3, 4, 5).forEach(v => {
     tagsViews[v].show = value;
   });
-}
-
-function disabledMenus(value: boolean) {
-  Array.of(1, 2, 3, 4, 5).forEach(v => {
-    tagsViews[v].disabled = value;
-  });
-}
-
-// 检查当前右键的菜单两边是否存在别的菜单，如果左侧的菜单是首页，则不显示关闭左侧标签页，如果右侧没有菜单，则不显示关闭右侧标签页
-function showMenuModel(
-  currentPath: string,
-  query: object = {},
-  refresh = false
-) {
-  let allRoute = multiTags.value;
-  let routeLength = multiTags.value.length;
-  let currentIndex = -1;
-  if (isEmpty(query)) {
-    currentIndex = allRoute.findIndex(v => v.path === currentPath);
-  } else {
-    currentIndex = allRoute.findIndex(v => isEqual(v.query, query));
-  }
-
-  showMenus(true);
-
-  if (refresh) {
-    tagsViews[0].show = true;
-  }
-
-  /**
-   * currentIndex为1时，左侧的菜单是首页，则不显示关闭左侧标签页
-   * 如果currentIndex等于routeLength-1，右侧没有菜单，则不显示关闭右侧标签页
-   */
-  if (currentIndex === 1 && routeLength !== 2) {
-    // 左侧的菜单是首页，右侧存在别的菜单
-    tagsViews[2].show = false;
-    Array.of(1, 3, 4, 5).forEach(v => {
-      tagsViews[v].disabled = false;
-    });
-    tagsViews[2].disabled = true;
-  } else if (currentIndex === 1 && routeLength === 2) {
-    disabledMenus(false);
-    // 左侧的菜单是首页，右侧不存在别的菜单
-    Array.of(2, 3, 4).forEach(v => {
-      tagsViews[v].show = false;
-      tagsViews[v].disabled = true;
-    });
-  } else if (routeLength - 1 === currentIndex && currentIndex !== 0) {
-    // 当前路由是所有路由中的最后一个
-    tagsViews[3].show = false;
-    Array.of(1, 2, 4, 5).forEach(v => {
-      tagsViews[v].disabled = false;
-    });
-    tagsViews[3].disabled = true;
-  } else if (currentIndex === 0 || currentPath === "/redirect/welcome") {
-    // 当前路由为首页
-    disabledMenus(true);
-  } else {
-    disabledMenus(false);
-  }
 }
 
 function openMenu(tag, e) {
@@ -504,7 +379,6 @@ function openMenu(tag, e) {
   } else if (route.path !== tag.path) {
     // 右键菜单不匹配当前路由，隐藏刷新
     tagsViews[0].show = false;
-    showMenuModel(tag.path, tag.query);
   } else if (
     // eslint-disable-next-line no-dupe-else-if
     multiTags.value.length === 2 &&
@@ -515,7 +389,6 @@ function openMenu(tag, e) {
     tagsViews[4].show = false;
   } else if (route.path === tag.path) {
     // 右键当前激活的菜单
-    showMenuModel(tag.path, tag.query, true);
   }
 
   currentSelect.value = tag;
@@ -543,7 +416,7 @@ function tagOnClick(item) {
     path: item?.path,
     query: item?.query
   });
-  showMenuModel(item?.path, item?.query);
+  // showMenuModel(item?.path, item?.query);
 }
 
 // 鼠标移入
@@ -589,10 +462,6 @@ watch(
 
 onBeforeMount(() => {
   if (!instance) return;
-
-  // 根据当前路由初始化操作标签页的禁用状态
-  showMenuModel(route.fullPath);
-
   // 触发隐藏标签页
   emitter.on("tagViewsChange", key => {
     // @ts-expect-error
@@ -609,9 +478,6 @@ onBeforeMount(() => {
   //  接收侧边栏切换传递过来的参数
   emitter.on("changLayoutRoute", ({ indexPath, parentPath }) => {
     dynamicRouteTag(indexPath, parentPath);
-    setTimeout(() => {
-      showMenuModel(indexPath);
-    });
   });
 });
 
@@ -653,7 +519,7 @@ const getContextMenuStyle = computed((): CSSProperties => {
             :to="item.path"
             class="!dark:color-text_color_primary !dark:hover:color-primary"
           >
-            {{ transformI18n(item.meta.title) }}
+            {{ item.meta.title }}
           </router-link>
           <span
             v-if="
@@ -689,46 +555,13 @@ const getContextMenuStyle = computed((): CSSProperties => {
           :key="key"
           style="display: flex; align-items: center"
         >
-          <li v-if="item.show" @click="selectTag(key, item)">
+          <li v-if="item.show">
             <component :is="toRaw(item.icon)" :key="key" />
             {{ t(item.text) }}
           </li>
         </div>
       </ul>
     </transition>
-    <!-- 右侧功能按钮 -->
-    <ul class="right-button">
-      <li>
-        <el-dropdown
-          trigger="click"
-          placement="bottom-end"
-          @command="handleCommand"
-        >
-          <el-icon class="dark:color-white"><ArrowDown /></el-icon>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item
-                v-for="(item, key) in tagsViews"
-                :key="key"
-                :command="{ key, item }"
-                :divided="item.divided"
-                :disabled="item.disabled"
-              >
-                <component
-                  :is="toRaw(item.icon)"
-                  :key="key"
-                  style="margin-right: 6px"
-                />
-                {{ t(item.text) }}
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-      </li>
-      <li>
-        <slot />
-      </li>
-    </ul>
   </div>
 </template>
 

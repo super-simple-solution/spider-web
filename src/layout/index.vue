@@ -10,7 +10,6 @@ import navbar from "./components/navbar.vue";
 import tag from "./components/tag/index.vue";
 import appMain from "./components/appMain.vue";
 import Vertical from "./components/sidebar/vertical.vue";
-import Horizontal from "./components/sidebar/horizontal.vue";
 
 const pureSetting = useSettingStoreHook();
 
@@ -99,9 +98,6 @@ const layoutHeader = defineComponent({
           !pureSetting.hiddenSideBar &&
           (layout.value.includes("vertical") || layout.value.includes("mix"))
             ? h(navbar)
-            : h("div"),
-          !pureSetting.hiddenSideBar && layout.value.includes("horizontal")
-            ? h(Horizontal)
             : h("div"),
           h(tag, {})
         ]

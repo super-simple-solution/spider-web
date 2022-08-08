@@ -8,7 +8,6 @@ import {
 } from "./types.d";
 import qs from "qs";
 import NProgress from "../progress";
-// import { loadEnv } from "@build/index";
 import { getToken } from "/@/utils/auth";
 import { useUserStoreHook } from "/@/store/modules/user";
 

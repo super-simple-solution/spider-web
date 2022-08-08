@@ -1,9 +1,8 @@
 import dayjs from "dayjs";
 import { resolve } from "path";
 import pkg from "./package.json";
-import { warpperEnv, regExps } from "./build";
 import { getPluginsList } from "./build/plugins";
-import { UserConfigExport, ConfigEnv, loadEnv } from "vite";
+import { UserConfigExport, ConfigEnv } from "vite";
 import tailwind from "tailwindcss";
 import autoprefixer from "autoprefixer";
 
@@ -27,38 +26,37 @@ const __APP_INFO__ = {
   lastBuildTime: dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss")
 };
 
-export default ({ command, mode }: ConfigEnv): UserConfigExport => {
-  const {
-    VITE_PORT,
-    VITE_PUBLIC_PATH,
-    VITE_PROXY_DOMAIN,
-    VITE_PROXY_DOMAIN_REAL
-  } = warpperEnv(loadEnv(mode, root));
+const envStr = "test";
+
+const evnPath = `http://baidu.com`;
+
+const pathMap = {
+  test: evnPath,
+  pre: evnPath
+};
+
+export default ({ command }: ConfigEnv): UserConfigExport => {
   return {
-    base: VITE_PUBLIC_PATH,
+    base: "/",
     root,
     resolve: {
       alias
     },
     // 服务端渲染
     server: {
-      // 是否开启 https
-      https: false,
-      // 端口号
-      port: VITE_PORT,
-      host: "0.0.0.0",
-      // 本地跨域代理
-      proxy:
-        VITE_PROXY_DOMAIN_REAL.length > 0
-          ? {
-              [VITE_PROXY_DOMAIN]: {
-                target: VITE_PROXY_DOMAIN_REAL,
-                // ws: true,
-                changeOrigin: true,
-                rewrite: (path: string) => regExps(path, VITE_PROXY_DOMAIN)
-              }
-            }
-          : null
+      strictPort: false,
+      port: 3020,
+      proxy: {
+        "/api": {
+          target: pathMap[envStr],
+          rewrite: path => path.replace(/^\/api/, "/bus/web_awesomed"),
+          changeOrigin: true,
+          ws: true
+        }
+      },
+      hmr: {
+        overlay: false
+      }
     },
     plugins: getPluginsList(command),
     optimizeDeps: {

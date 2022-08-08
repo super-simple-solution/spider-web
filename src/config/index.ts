@@ -1,9 +1,6 @@
 import { App } from "vue";
 import axios from "axios";
-import { loadEnv } from "@build/index";
-
 let config: object = {};
-const { VITE_PUBLIC_PATH } = loadEnv();
 
 const setConfig = (cfg?: unknown) => {
   config = Object.assign(config, cfg);
@@ -33,7 +30,7 @@ export const getServerConfig = async (app: App): Promise<undefined> => {
   return axios({
     baseURL: "",
     method: "get",
-    url: `${VITE_PUBLIC_PATH}serverConfig.json`
+    url: `/serverConfig.json`
   })
     .then(({ data: config }) => {
       let $config = app.config.globalProperties.$config;

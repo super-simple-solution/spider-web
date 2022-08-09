@@ -5,7 +5,7 @@ import { childrenType } from "../../types";
 import { ref, toRaw, PropType, nextTick, computed, CSSProperties } from "vue";
 
 const { pureApp } = useNav();
-const menuMode = ["vertical", "mix"].includes(pureApp.layout);
+const menuMode = true;
 
 const props = defineProps({
   item: {

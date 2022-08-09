@@ -46,7 +46,6 @@ const openDepot = (): void => {
         :lg="12"
         :xl="12"
         style="margin-bottom: 20px"
-        v-motion
         :initial="{
           opacity: 0,
           y: 100
@@ -63,7 +62,7 @@ const openDepot = (): void => {
           <template #header>
             <span style="font-size: 16px; font-weight: 500">GitHub信息</span>
           </template>
-          <el-skeleton animated :rows="7" :loading="loading">
+          <el-skeleton :rows="7" :loading="loading">
             <template #default> w </template>
           </el-skeleton>
         </el-card>
@@ -76,7 +75,6 @@ const openDepot = (): void => {
         :lg="12"
         :xl="12"
         style="margin-bottom: 20px"
-        v-motion
         :initial="{
           opacity: 0,
           y: 100

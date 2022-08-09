@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import {
-  h,
-  ref,
-  computed,
-  Transition,
-  defineComponent,
-  getCurrentInstance
-} from "vue";
+import { ref, computed, getCurrentInstance } from "vue";
 import backTop from "/@/assets/svg/back_top.svg?component";
 import { usePermissionStoreHook } from "/@/store/modules/permission";
 
@@ -18,12 +11,6 @@ const keepAlive: Boolean = ref(
 );
 const instance =
   getCurrentInstance().appContext.app.config.globalProperties.$storage;
-
-const transitions = computed(() => {
-  return route => {
-    return route.meta.transition;
-  };
-});
 
 const hideTabs = computed(() => {
   return instance?.configure.hideTabs;
@@ -42,40 +29,6 @@ const getSectionStyle = computed(() => {
     props.fixedHeader ? "" : "padding-top: 0;"
   ];
 });
-
-const transitionMain = defineComponent({
-  render() {
-    return h(
-      Transition,
-      {
-        name:
-          transitions.value(this.route) &&
-          this.route.meta.transition.enterTransition
-            ? "pure-classes-transition"
-            : (transitions.value(this.route) &&
-                this.route.meta.transition.name) ||
-              "fade-transform",
-        enterActiveClass:
-          transitions.value(this.route) &&
-          `animate__animated ${this.route.meta.transition.enterTransition}`,
-        leaveActiveClass:
-          transitions.value(this.route) &&
-          `animate__animated ${this.route.meta.transition.leaveTransition}`,
-        mode: "out-in",
-        appear: true
-      },
-      {
-        default: () => [this.$slots.default()]
-      }
-    );
-  },
-  props: {
-    route: {
-      type: undefined,
-      required: true
-    }
-  }
-});
 </script>
 
 <template>
@@ -89,44 +42,40 @@ const transitionMain = defineComponent({
           <el-backtop title="回到顶部" target=".app-main .el-scrollbar__wrap">
             <backTop />
           </el-backtop>
-          <transitionMain :route="route">
-            <keep-alive
-              v-if="keepAlive"
-              :include="usePermissionStoreHook().cachePageList"
-            >
-              <component
-                :is="Component"
-                :key="route.fullPath"
-                class="main-content"
-              />
-            </keep-alive>
+          <keep-alive
+            v-if="keepAlive"
+            :include="usePermissionStoreHook().cachePageList"
+          >
             <component
-              v-else
               :is="Component"
               :key="route.fullPath"
               class="main-content"
             />
-          </transitionMain>
+          </keep-alive>
+          <component
+            v-else
+            :is="Component"
+            :key="route.fullPath"
+            class="main-content"
+          />
         </el-scrollbar>
         <div v-else>
-          <transitionMain :route="route">
-            <keep-alive
-              v-if="keepAlive"
-              :include="usePermissionStoreHook().cachePageList"
-            >
-              <component
-                :is="Component"
-                :key="route.fullPath"
-                class="main-content"
-              />
-            </keep-alive>
+          <keep-alive
+            v-if="keepAlive"
+            :include="usePermissionStoreHook().cachePageList"
+          >
             <component
-              v-else
               :is="Component"
               :key="route.fullPath"
               class="main-content"
             />
-          </transitionMain>
+          </keep-alive>
+          <component
+            v-else
+            :is="Component"
+            :key="route.fullPath"
+            class="main-content"
+          />
         </div>
       </template>
     </router-view>

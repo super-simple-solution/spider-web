@@ -12,7 +12,6 @@ defineOptions({
     <div class="ml-12">
       <p
         class="font-medium text-4xl mb-4"
-        v-motion
         :initial="{
           opacity: 0,
           y: 100
@@ -29,7 +28,6 @@ defineOptions({
       </p>
       <p
         class="mb-4 text-gray-500"
-        v-motion
         :initial="{
           opacity: 0,
           y: 100
@@ -47,7 +45,6 @@ defineOptions({
       <el-button
         type="primary"
         @click="$router.push('/')"
-        v-motion
         :initial="{
           opacity: 0,
           y: 100

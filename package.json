@@ -12,8 +12,6 @@
     "@element-plus/icons-vue": "^2.0.6",
     "@pureadmin/utils": "^0.0.33",
     "@vueuse/core": "^8.9.4",
-    "@vueuse/motion": "^2.0.0-beta.12",
-    "animate.css": "^4.1.1",
     "axios": "^0.27.2",
     "dayjs": "^1.11.3",
     "element-plus": "^2.2.11",

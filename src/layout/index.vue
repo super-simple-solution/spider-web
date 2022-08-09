@@ -45,11 +45,11 @@ const set: setType = reactive({
 function setTheme(layoutModel: string) {
   window.document.body.setAttribute("layout", layoutModel);
   instance.$storage.layout = {
-    layout: `${layoutModel}`,
-    theme: instance.$storage.layout?.theme,
-    darkMode: instance.$storage.layout?.darkMode,
-    sidebarStatus: instance.$storage.layout?.sidebarStatus,
-    epThemeColor: instance.$storage.layout?.epThemeColor
+    layout: "vertical",
+    theme: "default",
+    darkMode: false,
+    sidebarStatus: true,
+    epThemeColor: "#409EFF"
   };
 }
 
@@ -58,32 +58,10 @@ function toggle(device: string, bool: boolean) {
   useAppStoreHook().toggleSideBar(bool, "resize");
 }
 
-// 判断是否可自动关闭菜单栏
-let isAutoCloseSidebar = true;
-
 // 监听容器
-emitter.on("resize", ({ detail }) => {
-  let { width } = detail;
-  width <= 670 ? setTheme("vertical") : setTheme(useAppStoreHook().layout);
-  /** width app-wrapper类容器宽度
-   * 0 < width <= 760 隐藏侧边栏
-   * 760 < width <= 990 折叠侧边栏
-   * width > 990 展开侧边栏
-   */
-  if (width > 0 && width <= 760) {
-    toggle("mobile", false);
-    isAutoCloseSidebar = true;
-  } else if (width > 760 && width <= 990) {
-    if (isAutoCloseSidebar) {
-      toggle("desktop", false);
-      isAutoCloseSidebar = false;
-    }
-  } else if (width > 990) {
-    if (!set.sidebar.isClickHamburger) {
-      toggle("desktop", true);
-      isAutoCloseSidebar = true;
-    }
-  }
+emitter.on("resize", () => {
+  setTheme(useAppStoreHook().layout);
+  toggle("desktop", true);
 });
 
 const layoutHeader = defineComponent({

@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import Motion from "./utils/motion";
 import { useRouter } from "vue-router";
 import { loginRules } from "./utils/rule";
 import { initRouter } from "/@/router/utils";
 import { ElMessage } from "element-plus";
 import type { FormInstance } from "element-plus";
 import { storageSession } from "@pureadmin/utils";
-import { useLayout } from "/@/layout/hooks/useLayout";
 import { useUserStoreHook } from "/@/store/modules/user";
 import { bg, avatar, currentWeek } from "./utils/static";
 import { ref, reactive, computed, getCurrentInstance } from "vue";
@@ -22,9 +20,6 @@ const ruleFormRef = ref<FormInstance>();
 const currentPage = computed(() => {
   return useUserStoreHook().currentPage;
 });
-
-const { initStorage } = useLayout();
-initStorage();
 
 const ruleForm = reactive({
   username: "admin",
@@ -65,9 +60,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
       <div class="login-box">
         <div class="login-form">
           <avatar class="avatar" />
-          <Motion>
-            <h2 class="outline-none">{{ title }}</h2>
-          </Motion>
+          <h2 class="outline-none">{{ title }}</h2>
 
           <el-form
             v-if="currentPage === 0"
@@ -77,40 +70,34 @@ const onLogin = async (formEl: FormInstance | undefined) => {
             size="large"
             @keyup.enter="onLogin(ruleFormRef)"
           >
-            <Motion :delay="100">
-              <el-form-item prop="username">
-                <el-input
-                  clearable
-                  v-model="ruleForm.username"
-                  placeholder="账号"
-                />
-              </el-form-item>
-            </Motion>
+            <el-form-item prop="username">
+              <el-input
+                clearable
+                v-model="ruleForm.username"
+                placeholder="账号"
+              />
+            </el-form-item>
 
-            <Motion :delay="150">
-              <el-form-item prop="password">
-                <el-input
-                  clearable
-                  show-password
-                  v-model="ruleForm.password"
-                  placeholder="密码"
-                />
-              </el-form-item>
-            </Motion>
+            <el-form-item prop="password">
+              <el-input
+                clearable
+                show-password
+                v-model="ruleForm.password"
+                placeholder="密码"
+              />
+            </el-form-item>
 
-            <Motion :delay="250">
-              <el-form-item>
-                <el-button
-                  class="w-full mt-4"
-                  size="default"
-                  type="primary"
-                  :loading="loading"
-                  @click="onLogin(ruleFormRef)"
-                >
-                  登录
-                </el-button>
-              </el-form-item>
-            </Motion>
+            <el-form-item>
+              <el-button
+                class="w-full mt-4"
+                size="default"
+                type="primary"
+                :loading="loading"
+                @click="onLogin(ruleFormRef)"
+              >
+                登录
+              </el-button>
+            </el-form-item>
           </el-form>
         </div>
       </div>

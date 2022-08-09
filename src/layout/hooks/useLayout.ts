@@ -14,22 +14,14 @@ export function useLayout() {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       instance.$storage.tags = routerArrays;
     }
-    // 国际化
-    if (!instance.$storage.locale) {
-      // eslint-disable-next-line
-      instance.$storage.locale = { locale: instance.$config?.Locale ?? "zh" };
-    }
-    // 导航
-    if (!instance.$storage.layout) {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      instance.$storage.layout = {
-        layout: instance.$config?.Layout ?? "vertical",
-        theme: instance.$config?.Theme ?? "default",
-        darkMode: instance.$config?.DarkMode ?? false,
-        sidebarStatus: instance.$config?.SidebarStatus ?? true,
-        epThemeColor: instance.$config?.EpThemeColor ?? "#409EFF"
-      };
-    }
+    instance.$storage.locale = { locale: "zh" };
+    instance.$storage.layout = {
+      layout: "vertical",
+      theme: "default",
+      darkMode: false,
+      sidebarStatus: true,
+      epThemeColor: "#409EFF"
+    };
     // 灰色模式、色弱模式、隐藏标签页
     if (!instance.$storage.configure) {
       // eslint-disable-next-line
@@ -47,13 +39,9 @@ export function useLayout() {
   const layout = computed(() => {
     return instance.$storage?.layout.layout;
   });
-  const layoutTheme = computed(() => {
-    return instance.$storage.layout;
-  });
   return {
     layout,
     instance,
-    layoutTheme,
     initStorage
   };
 }

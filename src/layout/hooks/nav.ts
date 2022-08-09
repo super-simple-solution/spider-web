@@ -6,7 +6,6 @@ import { routeMetaType } from "../types";
 import { remainingPaths } from "/@/router";
 import type { StorageConfigs } from "/#/index";
 import { routerArrays } from "/@/layout/types";
-import { transformI18n } from "/@/plugins/i18n";
 import { storageSession } from "@pureadmin/utils";
 import { useAppStoreHook } from "/@/store/modules/app";
 import { useEpThemeStoreHook } from "/@/store/modules/epTheme";
@@ -42,8 +41,8 @@ export function useNav() {
   // 动态title
   function changeTitle(meta: routeMetaType) {
     const Title = getConfig().Title;
-    if (Title) document.title = `${transformI18n(meta.title)} | ${Title}`;
-    else document.title = transformI18n(meta.title);
+    if (Title) document.title = `${meta.title} | ${Title}`;
+    else document.title = meta.title;
   }
 
   // 退出登录

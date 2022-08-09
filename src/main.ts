@@ -4,7 +4,6 @@ import { setupStore } from "/@/store";
 import ElementPlus from "element-plus";
 import { getServerConfig } from "./config";
 import { createApp, Directive } from "vue";
-import { useI18n } from "../src/plugins/i18n";
 import { MotionPlugin } from "@vueuse/motion";
 import VirtualScroller from "vue-virtual-scroller";
 import { injectResponsiveStorage } from "/@/utils/responsive";
@@ -32,6 +31,6 @@ getServerConfig(app).then(async config => {
   await router.isReady();
   injectResponsiveStorage(app, config);
   setupStore(app);
-  app.use(MotionPlugin).use(useI18n).use(ElementPlus).use(VirtualScroller);
+  app.use(MotionPlugin).use(ElementPlus).use(VirtualScroller);
   app.mount("#app");
 });

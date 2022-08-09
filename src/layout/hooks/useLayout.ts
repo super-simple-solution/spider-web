@@ -1,4 +1,3 @@
-import { useI18n } from "vue-i18n";
 import { routerArrays } from "../types";
 import { computed, getCurrentInstance } from "vue";
 import { useMultiTagsStore } from "/@/store/modules/multiTags";
@@ -19,7 +18,6 @@ export function useLayout() {
     if (!instance.$storage.locale) {
       // eslint-disable-next-line
       instance.$storage.locale = { locale: instance.$config?.Locale ?? "zh" };
-      useI18n().locale.value = instance.$config?.Locale ?? "zh";
     }
     // 导航
     if (!instance.$storage.layout) {

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { isEqual } from "lodash-unified";
-import { transformI18n } from "/@/plugins/i18n";
 import { getParentPaths, findRouteByPath } from "/@/router/utils";
 import { useMultiTagsStoreHook } from "/@/store/modules/multiTags";
 import { useRoute, useRouter, RouteLocationMatched } from "vue-router";
@@ -105,10 +104,10 @@ const handleLink = (item: RouteLocationMatched): any => {
           v-if="item.redirect === 'noRedirect' || index == levelList.length - 1"
           class="no-redirect"
         >
-          {{ transformI18n(item.meta.title) }}
+          {{ item.meta.title }}
         </span>
         <a v-else @click.prevent="handleLink(item)">
-          {{ transformI18n(item.meta.title) }}
+          {{ item.meta.title }}
         </a>
       </el-breadcrumb-item>
     </transition-group>

@@ -60,7 +60,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
     },
     plugins: getPluginsList(command),
     optimizeDeps: {
-      include: ["pinia", "vue-i18n", "@vueuse/core", "dayjs"],
+      include: ["pinia", "@vueuse/core", "dayjs"],
       exclude: ["@pureadmin/theme/dist/browser-utils"]
     },
     build: {

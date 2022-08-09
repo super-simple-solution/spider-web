@@ -1,9 +1,7 @@
-import { resolve } from "path";
 import vue from "@vitejs/plugin-vue";
 import svgLoader from "vite-svg-loader";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { viteMockServe } from "vite-plugin-mock";
-import VueI18n from "@intlify/vite-plugin-vue-i18n";
 import themePreprocessorPlugin from "@pureadmin/theme";
 import { genScssMultipleScopeVars } from "/@/layout/theme";
 import DefineOptions from "unplugin-vue-define-options/vite";
@@ -12,12 +10,6 @@ export function getPluginsList(command) {
   const prodMock = true;
   return [
     vue(),
-    // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
-    VueI18n({
-      runtimeOnly: true,
-      compositionOnly: true,
-      include: [resolve("locales/**")]
-    }),
     // jsx、tsx语法支持
     vueJsx(),
     DefineOptions(),

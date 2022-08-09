@@ -22,13 +22,11 @@ import closeRight from "/@/assets/svg/close_right.svg?component";
 
 import { ArrowRight, ArrowLeft, CloseBold } from "@element-plus/icons-vue";
 
-import { useI18n } from "vue-i18n";
 import { emitter } from "/@/utils/mitt";
 import type { StorageConfigs } from "/#/index";
 import { routerArrays } from "/@/layout/types";
 import { useRoute, useRouter } from "vue-router";
 import { isEqual } from "lodash-unified";
-import { $t } from "/@/plugins/i18n";
 import { RouteConfigs, tagsViewsType } from "../../types";
 import { useSettingStoreHook } from "/@/store/modules/settings";
 import { handleAliveRoute, delAliveRoutes } from "/@/router/utils";
@@ -36,7 +34,6 @@ import { useMultiTagsStoreHook } from "/@/store/modules/multiTags";
 import { templateRef, useResizeObserver, useDebounceFn } from "@vueuse/core";
 import { toggleClass, hasClass, storageLocal } from "@pureadmin/utils";
 
-const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
 const translateX = ref<number>(0);
@@ -198,42 +195,42 @@ const handleScroll = (offset: number): void => {
 const tagsViews = reactive<Array<tagsViewsType>>([
   {
     icon: refresh,
-    text: $t("buttons.hsreload"),
+    text: "重新加载",
     divided: false,
     disabled: false,
     show: true
   },
   {
     icon: close,
-    text: $t("buttons.hscloseCurrentTab"),
+    text: "关闭当前标签页",
     divided: false,
     disabled: multiTags.value.length > 1 ? false : true,
     show: true
   },
   {
     icon: closeLeft,
-    text: $t("buttons.hscloseLeftTabs"),
+    text: "关闭左侧标签页",
     divided: true,
     disabled: multiTags.value.length > 1 ? false : true,
     show: true
   },
   {
     icon: closeRight,
-    text: $t("buttons.hscloseRightTabs"),
+    text: "关闭右侧标签页",
     divided: false,
     disabled: multiTags.value.length > 1 ? false : true,
     show: true
   },
   {
     icon: closeOther,
-    text: $t("buttons.hscloseOtherTabs"),
+    text: "关闭其他标签页",
     divided: true,
     disabled: multiTags.value.length > 2 ? false : true,
     show: true
   },
   {
     icon: closeAll,
-    text: $t("buttons.hscloseAllTabs"),
+    text: "关闭全部标签页",
     divided: false,
     disabled: multiTags.value.length > 1 ? false : true,
     show: true
@@ -557,7 +554,7 @@ const getContextMenuStyle = computed((): CSSProperties => {
         >
           <li v-if="item.show">
             <component :is="toRaw(item.icon)" :key="key" />
-            {{ t(item.text) }}
+            {{ item.text }}
           </li>
         </div>
       </ul>

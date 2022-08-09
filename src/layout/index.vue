@@ -1,49 +1,18 @@
 <script setup lang="ts">
-import { setType } from "./types";
 import { emitter } from "/@/utils/mitt";
 import { useLayout } from "./hooks/useLayout";
 import { useAppStoreHook } from "/@/store/modules/app";
-import { useSettingStoreHook } from "/@/store/modules/settings";
-import { h, reactive, computed, defineComponent } from "vue";
+import { h, defineComponent } from "vue";
 
 import navbar from "./components/navbar.vue";
 import tag from "./components/tag/index.vue";
 import appMain from "./components/appMain.vue";
 import Vertical from "./components/sidebar/vertical.vue";
 
-const pureSetting = useSettingStoreHook();
+const { instance } = useLayout();
 
-const { instance, layout } = useLayout();
-
-const set: setType = reactive({
-  sidebar: computed(() => {
-    return useAppStoreHook().sidebar;
-  }),
-
-  device: computed(() => {
-    return useAppStoreHook().device;
-  }),
-
-  fixedHeader: computed(() => {
-    return pureSetting.fixedHeader;
-  }),
-
-  classes: computed(() => {
-    return {
-      hideSidebar: !set.sidebar.opened,
-      openSidebar: set.sidebar.opened,
-      withoutAnimation: set.sidebar.withoutAnimation,
-      mobile: set.device === "mobile"
-    };
-  }),
-
-  hideTabs: computed(() => {
-    return instance.$storage?.configure.hideTabs;
-  })
-});
-
-function setTheme(layoutModel: string) {
-  window.document.body.setAttribute("layout", layoutModel);
+function setTheme() {
+  window.document.body.setAttribute("layout", "vertical");
   instance.$storage.layout = {
     layout: "vertical",
     theme: "default",
@@ -60,7 +29,7 @@ function toggle(device: string, bool: boolean) {
 
 // 监听容器
 emitter.on("resize", () => {
-  setTheme(useAppStoreHook().layout);
+  setTheme();
   toggle("desktop", true);
 });
 
@@ -69,16 +38,10 @@ const layoutHeader = defineComponent({
     return h(
       "div",
       {
-        class: { "fixed-header": set.fixedHeader }
+        class: { "fixed-header": true }
       },
       {
-        default: () => [
-          !pureSetting.hiddenSideBar &&
-          (layout.value.includes("vertical") || layout.value.includes("mix"))
-            ? h(navbar)
-            : h("div"),
-          h(tag, {})
-        ]
+        default: () => [h(navbar), h(tag, {})]
       }
     );
   }
@@ -86,38 +49,14 @@ const layoutHeader = defineComponent({
 </script>
 
 <template>
-  <div :class="['app-wrapper', set.classes]" v-resize>
-    <div
-      v-show="
-        set.device === 'mobile' &&
-        set.sidebar.opened &&
-        layout.includes('vertical')
-      "
-      class="app-mask"
-      @click="useAppStoreHook().toggleSideBar()"
-    />
-    <Vertical
-      v-show="
-        !pureSetting.hiddenSideBar &&
-        (layout.includes('vertical') || layout.includes('mix'))
-      "
-    />
-    <div
-      :class="[
-        'main-container',
-        pureSetting.hiddenSideBar ? 'main-hidden' : ''
-      ]"
-    >
-      <div v-if="set.fixedHeader">
+  <div class="app-wrapper openSidebar withoutAnimation" v-resize>
+    <Vertical />
+    <div class="main-container">
+      <div>
         <layout-header />
         <!-- 主体内容 -->
-        <app-main :fixed-header="set.fixedHeader" />
+        <app-main :fixed-header="true" />
       </div>
-      <el-scrollbar v-else>
-        <layout-header />
-        <!-- 主体内容 -->
-        <app-main :fixed-header="set.fixedHeader" />
-      </el-scrollbar>
     </div>
   </div>
 </template>
@@ -137,28 +76,9 @@ const layoutHeader = defineComponent({
   position: relative;
   height: 100%;
   width: 100%;
-
-  &.mobile.openSidebar {
-    position: fixed;
-    top: 0;
-  }
 }
 
 .main-hidden {
   margin-left: 0 !important;
-}
-
-.app-mask {
-  background: #000;
-  opacity: 0.3;
-  width: 100%;
-  top: 0;
-  height: 100%;
-  position: absolute;
-  z-index: 999;
-}
-
-.re-screen {
-  margin-top: 12px;
 }
 </style>

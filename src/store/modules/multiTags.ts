@@ -4,7 +4,7 @@ import { isEqual } from "lodash-unified";
 import type { StorageConfigs } from "/#/index";
 import { routerArrays } from "/@/layout/types";
 import { multiType, positionType } from "./types";
-import { isUrl, storageLocal } from "@pureadmin/utils";
+import { storageLocal } from "@pureadmin/utils";
 
 export const useMultiTagsStore = defineStore({
   id: "pure-multiTags",
@@ -48,7 +48,6 @@ export const useMultiTagsStore = defineStore({
         case "push":
           {
             const tagVal = value as multiType;
-            if (isUrl(tagVal?.name)) return;
             if (tagVal?.meta?.title.length === 0) return;
             const tagPath = tagVal?.path;
             // 判断tag是否已存在

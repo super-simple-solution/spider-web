@@ -23,12 +23,7 @@ import {
   formatTwoStageRoutes,
   formatFlatteningRoutes
 } from "./utils";
-import {
-  buildHierarchyTree,
-  openLink,
-  isUrl,
-  storageSession
-} from "@pureadmin/utils";
+import { storageSession } from "@pureadmin/utils";
 
 import homeRouter from "./modules/home";
 import errorRouter from "./modules/error";
@@ -39,7 +34,7 @@ const routes = [homeRouter, errorRouter];
 
 // 导出处理后的静态路由（三级及以上的路由全部拍成二级）
 export const constantRoutes: Array<RouteRecordRaw> = formatTwoStageRoutes(
-  formatFlatteningRoutes(buildHierarchyTree(ascending(routes)))
+  formatFlatteningRoutes(routes)
 );
 
 // 用于渲染菜单，保持原始层级
@@ -87,23 +82,15 @@ router.beforeEach((to: toRouteType, _from, next) => {
   }
   const name = storageSession.getItem<StorageConfigs>("info");
   NProgress.start();
-  const externalLink = isUrl(to?.name as string);
-  if (!externalLink)
-    to.matched.some(item => {
-      if (!item.meta.title) return "";
-      const Title = getConfig().Title;
-      if (Title) document.title = `${item.meta.title} | ${Title}`;
-      else document.title = `${item.meta.title}`;
-    });
+  to.matched.some(item => {
+    if (!item.meta.title) return "";
+    const Title = getConfig().Title;
+    if (Title) document.title = `${item.meta.title} | ${Title}`;
+    else document.title = `${item.meta.title}`;
+  });
   if (name) {
     if (_from?.name) {
-      // name为超链接
-      if (externalLink) {
-        openLink(to?.name as string);
-        NProgress.done();
-      } else {
-        next();
-      }
+      next();
     } else {
       // 刷新
       if (usePermissionStoreHook().wholeMenus.length === 0)

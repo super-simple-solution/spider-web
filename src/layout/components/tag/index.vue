@@ -32,7 +32,7 @@ import { useSettingStoreHook } from "/@/store/modules/settings";
 import { handleAliveRoute, delAliveRoutes } from "/@/router/utils";
 import { useMultiTagsStoreHook } from "/@/store/modules/multiTags";
 import { templateRef, useResizeObserver, useDebounceFn } from "@vueuse/core";
-import { toggleClass, hasClass, storageLocal } from "@pureadmin/utils";
+import { storageLocal } from "@pureadmin/utils";
 
 const route = useRoute();
 const router = useRouter();
@@ -416,36 +416,6 @@ function tagOnClick(item) {
   // showMenuModel(item?.path, item?.query);
 }
 
-// 鼠标移入
-function onMouseenter(index) {
-  if (index) activeIndex.value = index;
-  if (unref(showModel) === "smart") {
-    if (hasClass(instance.refs["schedule" + index][0], "schedule-active"))
-      return;
-    toggleClass(true, "schedule-in", instance.refs["schedule" + index][0]);
-    toggleClass(false, "schedule-out", instance.refs["schedule" + index][0]);
-  } else {
-    if (hasClass(instance.refs["dynamic" + index][0], "card-active")) return;
-    toggleClass(true, "card-in", instance.refs["dynamic" + index][0]);
-    toggleClass(false, "card-out", instance.refs["dynamic" + index][0]);
-  }
-}
-
-// 鼠标移出
-function onMouseleave(index) {
-  activeIndex.value = -1;
-  if (unref(showModel) === "smart") {
-    if (hasClass(instance.refs["schedule" + index][0], "schedule-active"))
-      return;
-    toggleClass(false, "schedule-in", instance.refs["schedule" + index][0]);
-    toggleClass(true, "schedule-out", instance.refs["schedule" + index][0]);
-  } else {
-    if (hasClass(instance.refs["dynamic" + index][0], "card-active")) return;
-    toggleClass(false, "card-in", instance.refs["dynamic" + index][0]);
-    toggleClass(true, "card-out", instance.refs["dynamic" + index][0]);
-  }
-}
-
 watch(
   () => visible.value,
   val => {
@@ -508,8 +478,6 @@ const getContextMenuStyle = computed((): CSSProperties => {
               : ''
           ]"
           @contextmenu.prevent="openMenu(item, $event)"
-          @mouseenter.prevent="onMouseenter(index)"
-          @mouseleave.prevent="onMouseleave(index)"
           @click="tagOnClick(item)"
         >
           <router-link

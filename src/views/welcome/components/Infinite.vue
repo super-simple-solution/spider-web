@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive } from "vue";
-import { templateRef } from "@vueuse/core";
-import SeamlessScroll from "/@/components/ReSeamlessScroll";
-
-const scroll = templateRef<ElRef | null>("scroll", null);
-
+import { ref } from "vue";
 let listData = ref([
   {
     date: "2021-09-01",
@@ -15,31 +10,6 @@ let listData = ref([
     date: "2021-09-02",
     name: "spider",
     star: "1100"
-  },
-  {
-    date: "2021-09-03",
-    name: "spider",
-    star: "1200"
-  },
-  {
-    date: "2021-09-04",
-    name: "spider",
-    star: "1300"
-  },
-  {
-    date: "2021-09-05",
-    name: "spider",
-    star: "1400"
-  },
-  {
-    date: "2021-09-06",
-    name: "spider",
-    star: "1500"
-  },
-  {
-    date: "2021-09-07",
-    name: "spider",
-    star: "1600"
   },
   {
     date: "2021-09-08",
@@ -57,10 +27,6 @@ let listData = ref([
     star: "1900"
   }
 ]);
-
-let classOption = reactive({
-  direction: "top"
-});
 </script>
 
 <template>
@@ -70,20 +36,13 @@ let classOption = reactive({
       <li>项目名称</li>
       <li>Star数量</li>
     </ul>
-    <SeamlessScroll
-      ref="scroll"
-      :data="listData"
-      :class-option="classOption"
-      class="warp"
-    >
-      <ul class="item">
-        <li v-for="(item, index) in listData" :key="index">
-          <span v-text="item.date" />
-          <span v-text="item.name" />
-          <span v-text="item.star" />
-        </li>
-      </ul>
-    </SeamlessScroll>
+    <ul class="item">
+      <li v-for="(item, index) in listData" :key="index">
+        <span v-text="item.date" />
+        <span v-text="item.name" />
+        <span v-text="item.star" />
+      </li>
+    </ul>
   </div>
 </template>
 

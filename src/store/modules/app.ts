@@ -3,7 +3,7 @@ import { appType } from "./types";
 import { defineStore } from "pinia";
 import { getConfig } from "/@/config";
 import type { StorageConfigs } from "/#/index";
-import { deviceDetection, storageLocal } from "@pureadmin/utils";
+import { storageLocal } from "@pureadmin/utils";
 
 export const useAppStore = defineStore({
   id: "pure-app",
@@ -19,7 +19,7 @@ export const useAppStore = defineStore({
     layout:
       storageLocal.getItem<StorageConfigs>("responsive-layout")?.layout ??
       getConfig().Layout,
-    device: deviceDetection() ? "mobile" : "desktop"
+    device: "desktop"
   }),
   getters: {
     getSidebarStatus() {

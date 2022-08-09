@@ -1,5 +1,4 @@
 import { reactive } from "vue";
-import { isPhone } from "@pureadmin/utils";
 import type { FormRules } from "element-plus";
 
 /** 6位数字验证码正则 */
@@ -8,6 +7,17 @@ export const REGEXP_SIX = /^\d{6}$/;
 /** 密码正则（密码格式应为8-18位数字、字母、符号的任意两种组合） */
 export const REGEXP_PWD =
   /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)]|[()])+$)(?!^.*[\u4E00-\u9FA5].*$)([^(0-9a-zA-Z)]|[()]|[a-z]|[A-Z]|[0-9]){8,18}$/;
+
+/**
+ * 电话
+ * @param {string} phone
+ * @returns {Boolean}
+ */
+export function isPhone(phone: string): boolean {
+  return /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-7|9])|(?:5[0-3|5-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1|8|9]))\d{8}$/.test(
+    phone
+  );
+}
 
 /** 登录校验 */
 const loginRules = reactive(<FormRules>{

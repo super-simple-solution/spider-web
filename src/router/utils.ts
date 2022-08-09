@@ -10,7 +10,6 @@ import { router } from "./index";
 import { cloneDeep } from "lodash-unified";
 import { useTimeoutFn } from "@vueuse/core";
 import { RouteConfigs } from "/@/layout/types";
-import { buildHierarchyTree } from "@pureadmin/utils";
 import { usePermissionStoreHook } from "/@/store/modules/permission";
 const Layout = () => import("/@/layout/index.vue");
 const IFrame = () => import("/@/layout/frameView.vue");
@@ -160,7 +159,7 @@ function initRouter(name: string) {
  */
 function formatFlatteningRoutes(routesList: RouteRecordRaw[]) {
   if (routesList.length === 0) return routesList;
-  let hierarchyList = buildHierarchyTree(routesList);
+  let hierarchyList = routesList;
   for (let i = 0; i < hierarchyList.length; i++) {
     if (hierarchyList[i].children) {
       hierarchyList = hierarchyList

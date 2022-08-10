@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import path from "path";
-import { useNav } from "../../hooks/nav";
 import { childrenType } from "../../types";
 import { ref, toRaw, PropType, nextTick, computed, CSSProperties } from "vue";
-
-const { pureApp } = useNav();
 const menuMode = true;
 
 const props = defineProps({
@@ -164,12 +161,7 @@ function resolvePath(routePath) {
     <template #title>
       <div v-if="toRaw(props.item.meta.icon)" class="sub-menu-icon" />
       <span v-if="!menuMode"> {{ props.item.meta.title }}</span>
-      <el-tooltip
-        v-else
-        placement="top"
-        :offset="-10"
-        :disabled="!pureApp.sidebar.opened || !props.item.showTooltip"
-      >
+      <el-tooltip v-else placement="top" :offset="-10">
         <template #content>
           {{ props.item.meta.title }}
         </template>

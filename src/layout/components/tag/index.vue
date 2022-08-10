@@ -28,7 +28,6 @@ import { routerArrays } from "/@/layout/types";
 import { useRoute, useRouter } from "vue-router";
 import { isEqual } from "lodash-unified";
 import { RouteConfigs, tagsViewsType } from "../../types";
-import { useSettingStoreHook } from "/@/store/modules/settings";
 import { handleAliveRoute, delAliveRoutes } from "/@/router/utils";
 import { useMultiTagsStoreHook } from "/@/store/modules/multiTags";
 import { templateRef, useResizeObserver, useDebounceFn } from "@vueuse/core";
@@ -39,7 +38,6 @@ const router = useRouter();
 const translateX = ref<number>(0);
 const activeIndex = ref<number>(-1);
 const instance = getCurrentInstance();
-const pureSetting = useSettingStoreHook();
 const tabDom = templateRef<HTMLElement | null>("tabDom", null);
 const containerDom = templateRef<HTMLElement | null>("containerDom", null);
 const scrollbarDom = templateRef<HTMLElement | null>("scrollbarDom", null);
@@ -399,9 +397,6 @@ function openMenu(tag, e) {
   } else {
     buttonLeft.value = left;
   }
-  pureSetting.hiddenSideBar
-    ? (buttonTop.value = e.clientY)
-    : (buttonTop.value = e.clientY - 40);
   setTimeout(() => {
     visible.value = true;
   }, 10);

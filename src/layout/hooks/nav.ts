@@ -4,13 +4,11 @@ import { remainingPaths } from "/@/router";
 import type { StorageConfigs } from "/#/index";
 import { routerArrays } from "/@/layout/types";
 import { storageSession } from "@pureadmin/utils";
-import { useAppStoreHook } from "/@/store/modules/app";
 import { useMultiTagsStoreHook } from "/@/store/modules/multiTags";
 
 const errorInfo = "当前路由配置不正确，请检查配置";
 
 export function useNav() {
-  const pureApp = useAppStoreHook();
   // 用户名
   const username: string =
     storageSession.getItem<StorageConfigs>("info")?.username;
@@ -71,7 +69,6 @@ export function useNav() {
     logout,
     menuSelect,
     resolvePath,
-    pureApp,
     username
   };
 }

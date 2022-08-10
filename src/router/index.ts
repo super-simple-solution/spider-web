@@ -1,4 +1,3 @@
-import { getConfig } from "/@/config";
 import { toRouteType } from "./types";
 import NProgress from "/@/utils/progress";
 import { findIndex } from "lodash-unified";
@@ -84,9 +83,7 @@ router.beforeEach((to: toRouteType, _from, next) => {
   NProgress.start();
   to.matched.some(item => {
     if (!item.meta.title) return "";
-    const Title = getConfig().Title;
-    if (Title) document.title = `${item.meta.title} | ${Title}`;
-    else document.title = `${item.meta.title}`;
+    document.title = `${item.meta.title}`;
   });
   if (name) {
     if (_from?.name) {

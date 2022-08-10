@@ -1,4 +1,3 @@
-import { computed } from "vue";
 import { router } from "/@/router";
 import { emitter } from "/@/utils/mitt";
 import { remainingPaths } from "/@/router";
@@ -16,10 +15,6 @@ export function useNav() {
   const username: string =
     storageSession.getItem<StorageConfigs>("info")?.username;
 
-  const isCollapse = computed(() => {
-    return !pureApp.getSidebarStatus;
-  });
-
   // 退出登录
   function logout() {
     useMultiTagsStoreHook().handleTags("equal", [...routerArrays]);
@@ -27,20 +22,8 @@ export function useNav() {
     router.push("/login");
   }
 
-  function backHome() {
-    router.push("/welcome");
-  }
-
-  function onPanel() {
-    emitter.emit("openPanel");
-  }
-
   function toggleSideBar() {
     pureApp.toggleSideBar();
-  }
-
-  function handleResize(menuRef) {
-    menuRef.handleResize();
   }
 
   function resolvePath(route) {
@@ -90,13 +73,9 @@ export function useNav() {
 
   return {
     logout,
-    backHome,
-    onPanel,
     toggleSideBar,
     menuSelect,
-    handleResize,
     resolvePath,
-    isCollapse,
     pureApp,
     username
   };

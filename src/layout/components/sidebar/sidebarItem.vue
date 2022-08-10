@@ -30,7 +30,7 @@ const getNoDropdownStyle = computed((): CSSProperties => {
 
 const getDivStyle = computed((): CSSProperties => {
   return {
-    width: pureApp.sidebar.opened ? "" : "100%",
+    width: "100%",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
@@ -40,7 +40,7 @@ const getDivStyle = computed((): CSSProperties => {
 
 const getMenuTextStyle = computed(() => {
   return {
-    width: pureApp.sidebar.opened ? "210px" : "",
+    width: "210px",
     overflow: "hidden",
     textOverflow: "ellipsis",
     outline: "none"
@@ -49,7 +49,7 @@ const getMenuTextStyle = computed(() => {
 
 const getSubTextStyle = computed((): CSSProperties => {
   return {
-    width: pureApp.sidebar.opened ? "210px" : "",
+    width: "210px",
     display: "inline-block",
     overflow: "hidden",
     textOverflow: "ellipsis"
@@ -133,18 +133,6 @@ function resolvePath(routePath) {
       :style="getNoDropdownStyle"
     >
       <div class="sub-menu-icon" v-if="toRaw(props.item.meta.icon)" />
-      <div
-        v-if="
-          !pureApp.sidebar.opened &&
-          pureApp.layout === 'mix' &&
-          props.item?.pathList?.length === 2
-        "
-        :style="getDivStyle"
-      >
-        <span :style="getMenuTextStyle">
-          {{ onlyOneChild.meta.title }}
-        </span>
-      </div>
       <template #title>
         <div :style="getDivStyle">
           <span v-if="!menuMode">

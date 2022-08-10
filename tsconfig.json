@@ -21,7 +21,6 @@
     "incremental": true,
     "paths": {
       "/@/*": ["src/*"],
-      "@build/*": ["build/*"],
       "/#/*": ["types/*"]
     },
     "types": [

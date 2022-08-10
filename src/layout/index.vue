@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { emitter } from "/@/utils/mitt";
-// import { useLayout } from "./hooks/useLayout";
-import { useAppStoreHook } from "/@/store/modules/app";
 import { h, defineComponent } from "vue";
 
 import navbar from "./components/navbar.vue";
@@ -9,29 +7,9 @@ import tag from "./components/tag/index.vue";
 import appMain from "./components/appMain.vue";
 import Vertical from "./components/sidebar/vertical.vue";
 
-// const { instance } = useLayout();
-
-// function setTheme() {
-//   window.document.body.setAttribute("layout", "vertical");
-//   // instance.$storage.layout = {
-//   //   layout: "vertical",
-//   //   theme: "default",
-//   //   darkMode: false,
-//   //   sidebarStatus: true,
-//   //   epThemeColor: "#409EFF"
-//   // };
-// }
-
-function toggle(device: string, bool: boolean) {
-  useAppStoreHook().toggleDevice(device);
-  useAppStoreHook().toggleSideBar(bool, "resize");
-}
-
 // 监听容器
 emitter.on("resize", () => {
-  // setTheme();
   window.document.body.setAttribute("layout", "vertical");
-  toggle("desktop", true);
 });
 
 const layoutHeader = defineComponent({

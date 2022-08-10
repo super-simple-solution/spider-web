@@ -22,10 +22,6 @@ export function useNav() {
     router.push("/login");
   }
 
-  function toggleSideBar() {
-    pureApp.toggleSideBar();
-  }
-
   function resolvePath(route) {
     if (!route.children) return console.error(errorInfo);
     const httpReg = /^http(s?):\/\//;
@@ -73,7 +69,6 @@ export function useNav() {
 
   return {
     logout,
-    toggleSideBar,
     menuSelect,
     resolvePath,
     pureApp,

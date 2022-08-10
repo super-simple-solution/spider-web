@@ -16,7 +16,6 @@ specifiers:
   '@vueuse/core': ^8.9.4
   autoprefixer: ^10.4.5
   axios: ^0.27.2
-  dayjs: ^1.11.3
   element-plus: ^2.2.11
   element-resize-detector: ^1.2.3
   eslint: ^8.8.0
@@ -54,10 +53,9 @@ specifiers:
 
 dependencies:
   '@element-plus/icons-vue': 2.0.6_vue@3.2.37
-  '@pureadmin/utils': 0.0.33_dayjs@1.11.4+vue@3.2.37
+  '@pureadmin/utils': 0.0.33_vue@3.2.37
   '@vueuse/core': 8.9.4_vue@3.2.37
   axios: 0.27.2
-  dayjs: 1.11.4
   element-plus: 2.2.12_vue@3.2.37
   element-resize-detector: 1.2.4
   js-cookie: 3.0.1
@@ -536,7 +534,7 @@ packages:
       fastq: 1.13.0
     dev: true
 
-  /@pureadmin/utils/0.0.33_dayjs@1.11.4+vue@3.2.37:
+  /@pureadmin/utils/0.0.33_vue@3.2.37:
     resolution: {integrity: sha512-9nxq07gjBDO2CxlpdXQptjY4IcAdDebJcht4sawqs0F8IPfMUR8j3YnU4Weyx/bDv0V/7ePM9yX98uGq3xhBfQ==}
     peerDependencies:
       dayjs: '*'
@@ -550,7 +548,6 @@ packages:
       vue:
         optional: true
     dependencies:
-      dayjs: 1.11.4
       vue: 3.2.37
     dev: false
 

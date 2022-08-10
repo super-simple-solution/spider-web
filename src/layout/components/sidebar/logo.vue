@@ -1,33 +1,15 @@
-<script setup lang="ts">
-import { getCurrentInstance } from "vue";
-const props = defineProps({
-  collapse: Boolean
-});
-
-const title =
-  getCurrentInstance().appContext.config.globalProperties.$config?.Title;
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div class="sidebar-logo-container" :class="{ collapse: props.collapse }">
+  <div class="sidebar-logo-container">
     <transition name="sidebarLogoFade">
       <router-link
-        v-if="props.collapse"
-        key="props.collapse"
-        :title="title"
-        class="sidebar-logo-link"
-        to="/"
-      >
-        <span class="sidebar-title">{{ title }}</span>
-      </router-link>
-      <router-link
-        v-else
         key="expand"
-        :title="title"
+        title="spider-web"
         class="sidebar-logo-link"
         to="/"
       >
-        <span class="sidebar-title">{{ title }}</span>
+        <span class="sidebar-title">spider-web</span>
       </router-link>
     </transition>
   </div>
@@ -54,12 +36,6 @@ const title =
       font-size: 20px;
       margin-top: 10px;
       font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
-    }
-  }
-
-  .collapse {
-    .sidebar-logo {
-      margin-right: 0;
     }
   }
 }

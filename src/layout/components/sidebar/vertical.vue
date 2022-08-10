@@ -1,30 +1,21 @@
 <script setup lang="ts">
 import Logo from "./logo.vue";
-import Hamburger from "./hamBurger.vue";
-import { emitter } from "/@/utils/mitt";
 import { useNav } from "../../hooks/nav";
 import SidebarItem from "./sidebarItem.vue";
-import type { StorageConfigs } from "/#/index";
-import { storageLocal } from "@pureadmin/utils";
 import { useRoute, useRouter } from "vue-router";
-import { ref, computed, watch, onBeforeMount } from "vue";
+import { ref, computed, watch } from "vue";
 import { findRouteByPath, getParentPaths } from "/@/router/utils";
 import { usePermissionStoreHook } from "/@/store/modules/permission";
 
 const route = useRoute();
 const routers = useRouter().options.routes;
-const showLogo = ref(
-  storageLocal.getItem<StorageConfigs>("responsive-configure")?.showLogo ?? true
-);
 
-const { pureApp, isCollapse, menuSelect, toggleSideBar } = useNav();
+const { menuSelect } = useNav();
 
 let subMenuData = ref([]);
 
 const menuData = computed(() => {
-  return pureApp.layout === "mix"
-    ? subMenuData.value
-    : usePermissionStoreHook().wholeMenus;
+  return usePermissionStoreHook().wholeMenus;
 });
 
 function getSubMenuData(path) {
@@ -43,12 +34,6 @@ function getSubMenuData(path) {
 }
 getSubMenuData(route.path);
 
-onBeforeMount(() => {
-  emitter.on("logoChange", key => {
-    showLogo.value = key as unknown as boolean;
-  });
-});
-
 watch(
   () => route.path,
   () => {
@@ -59,17 +44,15 @@ watch(
 </script>
 
 <template>
-  <div :class="['sidebar-container', showLogo ? 'has-logo' : '']">
-    <Logo v-if="showLogo" :collapse="isCollapse" />
+  <div class="sidebar-container has-logo">
+    <Logo />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         router
         unique-opened
         mode="vertical"
         class="outer-most"
-        :collapse="isCollapse"
         :default-active="route.path"
-        :collapse-transition="false"
         @select="indexPath => menuSelect(indexPath, routers)"
       >
         <sidebar-item
@@ -81,9 +64,5 @@ watch(
         />
       </el-menu>
     </el-scrollbar>
-    <Hamburger
-      :is-active="pureApp.sidebar.opened"
-      @toggleClick="toggleSideBar"
-    />
   </div>
 </template>

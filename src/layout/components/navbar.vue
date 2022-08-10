@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useNav } from "../hooks/nav";
-import avatars from "/@/assets/avatars.jpg";
 import Breadcrumb from "./sidebar/breadCrumb.vue";
 
 const { logout, username } = useNav();
@@ -15,7 +14,6 @@ const { logout, username } = useNav();
       <!-- 退出登录 -->
       <el-dropdown trigger="click">
         <span class="el-dropdown-link navbar-bg-hover">
-          <img v-if="avatars" :src="avatars" />
           <p v-if="username" class="dark:color-white">{{ username }}</p>
         </span>
         <template #dropdown>
@@ -53,12 +51,6 @@ const { logout, username } = useNav();
 
       p {
         font-size: 14px;
-      }
-
-      img {
-        width: 22px;
-        height: 22px;
-        border-radius: 50%;
       }
     }
   }

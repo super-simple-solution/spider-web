@@ -35,7 +35,6 @@ specifiers:
   prettier: ^2.5.1
   pretty-quick: 3.1.1
   qs: ^6.10.1
-  responsive-storage: ^2.0.0
   sass: ^1.53.0
   sass-loader: ^13.0.2
   tailwindcss: ^3.1.6
@@ -68,7 +67,6 @@ dependencies:
   path: 0.12.7
   pinia: 2.0.16_j6bzmzd4ujpabbp5objtwxyjp4
   qs: 6.11.0
-  responsive-storage: 2.0.0
   vue: 3.2.37
   vue-router: 4.1.2_vue@3.2.37
   vue-types: 4.1.1_vue@3.2.37
@@ -2753,10 +2751,6 @@ packages:
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
     dev: true
-
-  /responsive-storage/2.0.0:
-    resolution: {integrity: sha512-4pZbTlwDmJAbnZ0B93aQVfTOY58+LYwwQBGPDqAI89NbjnrgVdmqqemmzkfOSGNqFWWnCamq9moWASFk+oC2Fg==}
-    dev: false
 
   /reusify/1.0.4:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}

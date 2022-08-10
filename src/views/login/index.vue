@@ -6,14 +6,13 @@ import { ElMessage } from "element-plus";
 import type { FormInstance } from "element-plus";
 import { storageSession } from "@pureadmin/utils";
 import { useUserStoreHook } from "/@/store/modules/user";
-import { bg, avatar, currentWeek } from "./utils/static";
-import { ref, reactive, computed, getCurrentInstance } from "vue";
+import { avatar, currentWeek } from "./utils/static";
+import { ref, reactive, computed } from "vue";
 
 defineOptions({
   name: "Login"
 });
-const title =
-  getCurrentInstance().appContext.config.globalProperties.$config?.Title;
+
 const router = useRouter();
 const loading = ref(false);
 const ruleFormRef = ref<FormInstance>();
@@ -52,7 +51,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
 
 <template>
   <div class="wh-full select-none">
-    <img :src="bg" class="wave" />
+    <img src="../../assets/login/bg.png" class="wave" />
     <div class="login-container">
       <div class="img">
         <component :is="currentWeek" />
@@ -60,7 +59,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
       <div class="login-box">
         <div class="login-form">
           <avatar class="avatar" />
-          <h2 class="outline-none">{{ title }}</h2>
+          <h2 class="outline-none">spider-web</h2>
 
           <el-form
             v-if="currentPage === 0"

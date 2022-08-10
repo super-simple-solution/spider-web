@@ -57,14 +57,3 @@ export type childrenType = {
   parentId?: number;
   pathList?: number[];
 };
-
-export type themeColorsType = {
-  color: string;
-  themeColor: string;
-};
-
-export interface scrollbarDomType extends HTMLElement {
-  wrap?: {
-    offsetWidth: number;
-  };
-}

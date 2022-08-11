@@ -1,0 +1,15 @@
+- name: web_custom
+  product: gongyi
+  modules:
+    - name: custom
+      type: web
+      path:
+        - src: dist
+          dst: /
+          repl:
+            - var: "{{ domain_awesomed }}"
+              repl: "__domain_awesomed__"
+              filter: assets/.*js
+            - var: "{{ domain_awesomed_ws }}"
+              repl: "__domain_websocket__"
+              filter: assets/.*js

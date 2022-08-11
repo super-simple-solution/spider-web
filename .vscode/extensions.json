@@ -5,7 +5,6 @@
     "esbenp.prettier-vscode",
     "mikestead.dotenv",
     "eamodio.gitlens",
-    "antfu.iconify",
     "Vue.volar"
   ]
 }

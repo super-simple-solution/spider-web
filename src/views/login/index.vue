@@ -5,21 +5,14 @@ import { initRouter } from "/@/router/utils";
 import { ElMessage } from "element-plus";
 import type { FormInstance } from "element-plus";
 import { storageSession } from "@pureadmin/utils";
-import { useUserStoreHook } from "/@/store/modules/user";
 import { avatar, currentWeek } from "./utils/static";
-import { ref, reactive, computed } from "vue";
+import { ref, reactive } from "vue";
 
-defineOptions({
-  name: "Login"
-});
+defineOptions({ name: "Login" });
 
 const router = useRouter();
 const loading = ref(false);
 const ruleFormRef = ref<FormInstance>();
-const currentPage = computed(() => {
-  return useUserStoreHook().currentPage;
-});
-
 const ruleForm = reactive({
   username: "admin",
   password: "admin123"
@@ -60,9 +53,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
         <div class="login-form">
           <avatar class="avatar" />
           <h2 class="outline-none">spider-web</h2>
-
           <el-form
-            v-if="currentPage === 0"
             ref="ruleFormRef"
             :model="ruleForm"
             :rules="loginRules"

@@ -21,5 +21,4 @@ export type multiType = {
 export type userType = {
   token: string;
   name?: string;
-  currentPage?: number;
 };

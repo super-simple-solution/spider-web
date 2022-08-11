@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import path from "path";
 import { childrenType } from "../../types";
-import { ref, toRaw, PropType, nextTick, computed, CSSProperties } from "vue";
-const menuMode = true;
-
+import { ref, toRaw, PropType } from "vue";
 const props = defineProps({
   item: {
     type: Object as PropType<childrenType>
@@ -18,70 +16,7 @@ const props = defineProps({
   }
 });
 
-const getNoDropdownStyle = computed((): CSSProperties => {
-  return {
-    display: "flex",
-    alignItems: "center"
-  };
-});
-
-const getDivStyle = computed((): CSSProperties => {
-  return {
-    width: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    overflow: "hidden"
-  };
-});
-
-const getMenuTextStyle = computed(() => {
-  return {
-    width: "210px",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    outline: "none"
-  };
-});
-
-const getSubTextStyle = computed((): CSSProperties => {
-  return {
-    width: "210px",
-    display: "inline-block",
-    overflow: "hidden",
-    textOverflow: "ellipsis"
-  };
-});
-
-const getSpanStyle = computed(() => {
-  return {
-    overflow: "hidden",
-    textOverflow: "ellipsis"
-  };
-});
-
 const onlyOneChild: childrenType = ref(null);
-// 存放菜单是否存在showTooltip属性标识
-const hoverMenuMap = new WeakMap();
-// 存储菜单文本dom元素
-const menuTextRef = ref(null);
-
-function hoverMenu(key) {
-  // 如果当前菜单showTooltip属性已存在，退出计算
-  if (hoverMenuMap.get(key)) return;
-
-  nextTick(() => {
-    // 如果文本内容的整体宽度大于其可视宽度，则文本溢出
-    menuTextRef.value?.scrollWidth > menuTextRef.value?.clientWidth
-      ? Object.assign(key, {
-          showTooltip: true
-        })
-      : Object.assign(key, {
-          showTooltip: false
-        });
-    hoverMenuMap.set(key, true);
-  });
-}
 
 function hasOneShowingChild(
   children: childrenType[] = [],
@@ -127,54 +62,16 @@ function resolvePath(routePath) {
     <el-menu-item
       :index="resolvePath(onlyOneChild.path)"
       :class="{ 'submenu-title-noDropdown': !isNest }"
-      :style="getNoDropdownStyle"
     >
       <div class="sub-menu-icon" v-if="toRaw(props.item.meta.icon)" />
-      <template #title>
-        <div :style="getDivStyle">
-          <span v-if="!menuMode">
-            {{ onlyOneChild.meta.title }}
-          </span>
-          <el-tooltip
-            v-else
-            placement="top"
-            :offset="-10"
-            :disabled="!onlyOneChild.showTooltip"
-          >
-            <template #content>
-              {{ onlyOneChild.meta.title }}
-            </template>
-            <span
-              ref="menuTextRef"
-              :style="getMenuTextStyle"
-              @mouseover="hoverMenu(onlyOneChild)"
-            >
-              {{ onlyOneChild.meta.title }}
-            </span>
-          </el-tooltip>
-        </div>
-      </template>
+      <template #title> {{ onlyOneChild.meta.title }} </template>
     </el-menu-item>
   </template>
 
   <el-sub-menu v-else ref="subMenu" :index="resolvePath(props.item.path)">
     <template #title>
       <div v-if="toRaw(props.item.meta.icon)" class="sub-menu-icon" />
-      <span v-if="!menuMode"> {{ props.item.meta.title }}</span>
-      <el-tooltip v-else placement="top" :offset="-10">
-        <template #content>
-          {{ props.item.meta.title }}
-        </template>
-        <div
-          ref="menuTextRef"
-          :style="getSubTextStyle"
-          @mouseover="hoverMenu(props.item)"
-        >
-          <span :style="getSpanStyle">
-            {{ props.item.meta.title }}
-          </span>
-        </div>
-      </el-tooltip>
+      <div>{{ props.item.meta.title }}</div>
     </template>
     <sidebar-item
       v-for="child in props.item.children"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, getCurrentInstance } from "vue";
+import { ref, getCurrentInstance } from "vue";
 import backTop from "/@/assets/svg/back_top.svg?component";
 import { usePermissionStoreHook } from "/@/store/modules/permission";
 
@@ -9,33 +9,10 @@ const props = defineProps({
 const keepAlive: Boolean = ref(
   getCurrentInstance().appContext.config.globalProperties.$config?.KeepAlive
 );
-const instance =
-  getCurrentInstance().appContext.app.config.globalProperties.$storage;
-
-const hideTabs = computed(() => {
-  return instance?.configure.hideTabs;
-});
-
-const layout = computed(() => {
-  return instance?.layout.layout === "vertical";
-});
-
-const getSectionStyle = computed(() => {
-  return [
-    hideTabs.value && layout ? "padding-top: 48px;" : "",
-    !hideTabs.value && layout ? "padding-top: 85px;" : "",
-    hideTabs.value && !layout.value ? "padding-top: 48px" : "",
-    !hideTabs.value && !layout.value ? "padding-top: 85px;" : "",
-    props.fixedHeader ? "" : "padding-top: 0;"
-  ];
-});
 </script>
 
 <template>
-  <section
-    :class="[props.fixedHeader ? 'app-main' : 'app-main-nofixed-header']"
-    :style="getSectionStyle"
-  >
+  <section class="app-main">
     <router-view>
       <template #default="{ Component, route }">
         <el-scrollbar v-if="props.fixedHeader">
@@ -88,12 +65,7 @@ const getSectionStyle = computed(() => {
   height: 100vh;
   position: relative;
   overflow-x: hidden;
-}
-
-.app-main-nofixed-header {
-  width: 100%;
-  min-height: 100vh;
-  position: relative;
+  margin-top: 86px;
 }
 
 .main-content {

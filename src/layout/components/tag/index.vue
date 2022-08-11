@@ -3,8 +3,6 @@ import {
   ref,
   watch,
   unref,
-  toRaw,
-  reactive,
   nextTick,
   computed,
   ComputedRef,
@@ -13,13 +11,6 @@ import {
   getCurrentInstance
 } from "vue";
 
-import close from "/@/assets/svg/close.svg?component";
-import refresh from "/@/assets/svg/refresh.svg?component";
-import closeAll from "/@/assets/svg/close_all.svg?component";
-import closeLeft from "/@/assets/svg/close_left.svg?component";
-import closeOther from "/@/assets/svg/close_other.svg?component";
-import closeRight from "/@/assets/svg/close_right.svg?component";
-
 import { ArrowRight, ArrowLeft, CloseBold } from "@element-plus/icons-vue";
 
 import { emitter } from "/@/utils/mitt";
@@ -27,7 +18,7 @@ import type { StorageConfigs } from "/#/index";
 import { routerArrays } from "/@/layout/types";
 import { useRoute, useRouter } from "vue-router";
 import { isEqual } from "lodash-unified";
-import { RouteConfigs, tagsViewsType } from "../../types";
+import { RouteConfigs } from "../../types";
 import { handleAliveRoute, delAliveRoutes } from "/@/router/utils";
 import { useMultiTagsStoreHook } from "/@/store/modules/multiTags";
 import { templateRef, useResizeObserver, useDebounceFn } from "@vueuse/core";
@@ -190,51 +181,6 @@ const handleScroll = (offset: number): void => {
   }
 };
 
-const tagsViews = reactive<Array<tagsViewsType>>([
-  {
-    icon: refresh,
-    text: "重新加载",
-    divided: false,
-    disabled: false,
-    show: true
-  },
-  {
-    icon: close,
-    text: "关闭当前标签页",
-    divided: false,
-    disabled: multiTags.value.length > 1 ? false : true,
-    show: true
-  },
-  {
-    icon: closeLeft,
-    text: "关闭左侧标签页",
-    divided: true,
-    disabled: multiTags.value.length > 1 ? false : true,
-    show: true
-  },
-  {
-    icon: closeRight,
-    text: "关闭右侧标签页",
-    divided: false,
-    disabled: multiTags.value.length > 1 ? false : true,
-    show: true
-  },
-  {
-    icon: closeOther,
-    text: "关闭其他标签页",
-    divided: true,
-    disabled: multiTags.value.length > 2 ? false : true,
-    show: true
-  },
-  {
-    icon: closeAll,
-    text: "关闭全部标签页",
-    divided: false,
-    disabled: multiTags.value.length > 1 ? false : true,
-    show: true
-  }
-]);
-
 // 显示模式，默认灵动模式显示
 const showModel = ref(
   storageLocal.getItem<StorageConfigs>("responsive-configure")?.showModel ||
@@ -249,12 +195,6 @@ if (!showModel.value) {
 }
 
 let visible = ref(false);
-let buttonLeft = ref(0);
-let buttonTop = ref(0);
-
-// 当前右键选中的路由信息
-let currentSelect = ref({});
-
 function dynamicRouteTag(value: string, parentPath: string): void {
   const hasValue = multiTags.value.some(item => {
     return item.path === value;
@@ -359,49 +299,6 @@ function closeMenu() {
   visible.value = false;
 }
 
-function showMenus(value: boolean) {
-  Array.of(1, 2, 3, 4, 5).forEach(v => {
-    tagsViews[v].show = value;
-  });
-}
-
-function openMenu(tag, e) {
-  closeMenu();
-  if (tag.path === "/welcome") {
-    // 右键菜单为首页，只显示刷新
-    showMenus(false);
-    tagsViews[0].show = true;
-  } else if (route.path !== tag.path) {
-    // 右键菜单不匹配当前路由，隐藏刷新
-    tagsViews[0].show = false;
-  } else if (
-    // eslint-disable-next-line no-dupe-else-if
-    multiTags.value.length === 2 &&
-    route.path !== tag.path
-  ) {
-    showMenus(true);
-    // 只有两个标签时不显示关闭其他标签页
-    tagsViews[4].show = false;
-  } else if (route.path === tag.path) {
-    // 右键当前激活的菜单
-  }
-
-  currentSelect.value = tag;
-  const menuMinWidth = 105;
-  const offsetLeft = unref(containerDom).getBoundingClientRect().left;
-  const offsetWidth = unref(containerDom).offsetWidth;
-  const maxLeft = offsetWidth - menuMinWidth;
-  const left = e.clientX - offsetLeft + 5;
-  if (left > maxLeft) {
-    buttonLeft.value = maxLeft;
-  } else {
-    buttonLeft.value = left;
-  }
-  setTimeout(() => {
-    visible.value = true;
-  }, 10);
-}
-
 // 触发tags标签切换
 function tagOnClick(item) {
   router.push({
@@ -448,10 +345,6 @@ const getTabStyle = computed((): CSSProperties => {
     transform: `translateX(${translateX.value}px)`
   };
 });
-
-const getContextMenuStyle = computed((): CSSProperties => {
-  return { left: buttonLeft.value + "px", top: buttonTop.value + "px" };
-});
 </script>
 
 <template>
@@ -472,7 +365,6 @@ const getContextMenuStyle = computed((): CSSProperties => {
               ? 'card-active'
               : ''
           ]"
-          @contextmenu.prevent="openMenu(item, $event)"
           @click="tagOnClick(item)"
         >
           <router-link
@@ -502,26 +394,6 @@ const getContextMenuStyle = computed((): CSSProperties => {
     <span class="arrow-right">
       <el-icon @click="handleScroll(-200)"><ArrowRight /></el-icon>
     </span>
-    <!-- 右键菜单按钮 -->
-    <transition name="el-zoom-in-top">
-      <ul
-        v-show="visible"
-        :key="Math.random()"
-        :style="getContextMenuStyle"
-        class="contextmenu"
-      >
-        <div
-          v-for="(item, key) in tagsViews"
-          :key="key"
-          style="display: flex; align-items: center"
-        >
-          <li v-if="item.show">
-            <component :is="toRaw(item.icon)" :key="key" />
-            {{ item.text }}
-          </li>
-        </div>
-      </ul>
-    </transition>
   </div>
 </template>
 

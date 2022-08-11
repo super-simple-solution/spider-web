@@ -2,18 +2,6 @@
   /* vertical模式下主体内容距离网页文档左侧的距离 */ $sideBarWidth
 ) {
   $menuActiveText: #7a80b4;
-
-  @media screen and (min-width: 150px) and (max-width: 420px) {
-    .app-main-nofixed-header {
-      overflow-y: hidden;
-    }
-  }
-  @media screen and (min-width: 420px) {
-    .app-main-nofixed-header {
-      overflow: hidden;
-    }
-  }
-
   .sub-menu-icon {
     vertical-align: middle;
     font-size: 18px;
@@ -48,17 +36,6 @@
     transition: width var(--pure-transition-duration);
   }
 
-  .main-hidden {
-    margin-left: 0 !important;
-
-    .fixed-header {
-      width: 100% !important;
-
-      + .app-main {
-        padding-top: 37px !important;
-      }
-    }
-  }
 
   .el-popper.is-light {
     border: none !important;
@@ -93,7 +70,6 @@
 
     &.has-logo {
       .el-scrollbar {
-        /* logo: 48px、Hamburger: 40px、Hamburger-shadow: 4px */
         height: calc(100% - 92px);
       }
     }

@@ -1,5 +1,5 @@
 export default {
-  title: '定制公交',
+  title: 'spider-web',
 
   /**
    * @type {boolean} true | false

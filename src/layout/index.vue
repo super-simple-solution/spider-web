@@ -35,11 +35,9 @@ const { tagsView: needTagsView } = useSettingsStore()
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/mixin.scss';
 @import '@/styles/variables.scss';
 
 .app-wrapper {
-  @include clearfix;
   position: relative;
   height: 100%;
   width: 100%;

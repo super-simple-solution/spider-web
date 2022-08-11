@@ -8,17 +8,6 @@ export function parseScssVariable(str: string): object {
   return res
 }
 
-export function noNeedLogin(path = ''): boolean {
-  // 免登录白名单
-  const noLoginWhiteList = ['forecastcheck']
-  const pathRes = (path || location.hash).replace('#/', '').replace(/^\//, '').replace(/\?.*/, '')
-  return noLoginWhiteList.includes(pathRes)
-}
-
-export function toPascal(str: string) {
-  return str.replace(/^(\w)/, (_, p1) => p1.toUpperCase())
-}
-
 export function pickParams(obj: { [x: string]: any }) {
   const res: { [key: string]: string } = {}
   for (const key in obj) {
@@ -27,8 +16,4 @@ export function pickParams(obj: { [x: string]: any }) {
     }
   }
   return res
-}
-
-export function loadFile(url: string) {
-  return new URL(`../assets/${url}`, import.meta.url).href
 }

@@ -1,15 +1,9 @@
-import { useUserStore } from '@/store/user'
-import { toLogin, getToken } from '@/utils/auth'
 import axios, { AxiosRequestConfig, CustomSuccessData, AxiosResponse } from 'axios'
 import { IResponseData } from '@/types/axios'
 import { ElMessage, ElLoading } from 'element-plus'
-import { noNeedLogin } from '@/utils'
-
-const isPro = import.meta.env.PROD
-const CancelToken = axios.CancelToken
 
 const service = axios.create({
-  baseURL: isPro ? `${location.protocol}//${location.host}__domain_awesomed__` : '/api',
+  baseURL:  '/api',
   timeout: 30000,
 })
 
@@ -35,13 +29,6 @@ function endLoading(el: string | undefined) {
   }
 }
 
-function cancelGene(config: AxiosRequestConfig, message: string) {
-  return {
-    ...config,
-    cancelToken: new CancelToken((cancel) => cancel(message)),
-  }
-}
-
 // request interceptor
 service.interceptors.request.use(
   (config: AxiosRequestConfig) => {
@@ -50,22 +37,8 @@ service.interceptors.request.use(
     }
     const is_get = config.method === 'get'
     if (is_get) {
-      config.headers = {
-        'Content-Type': 'application/json',
-      }
-      // https://github.com/axios/axios/issues/86
+      config.headers = {  'Content-Type': 'application/json'  }
       config.data = null
-    }
-    const token = getToken()
-    if (token) {
-      config.headers = {
-        ...config.headers,
-        Authorization: token,
-      }
-    } else if (!noNeedLogin()) {
-      // 未登录
-      location.href = location.href.replace(/#.+/, '') + '#/login'
-      return cancelGene(config, 'Cancel not login request')
     }
     return config
   },
@@ -88,13 +61,6 @@ service.interceptors.response.use(
     const code = resFinal.errorCode || resFinal.code
     const msg = resFinal.msg || resFinal.errorMsg || resFinal.error || '接口错误'
     if (code) {
-      if (!isPro) {
-        console.log('报错URL: ', config.url)
-      }
-      if (code == 40101) {
-        toLogin()
-        return
-      }
       if (code == 401) {
         !config.silence && !errorShowing && ElMessage.error(msg)
         errorShowing = true
@@ -102,8 +68,6 @@ service.interceptors.response.use(
           errorShowing = false
         }, 3000)
 
-        useUserStore().resetToken()
-        toLogin()
         return
       }
       if (code) {

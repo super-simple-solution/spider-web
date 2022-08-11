@@ -11,7 +11,6 @@
   "dependencies": {
     "@element-plus/icons-vue": "^1.1.4",
     "axios": "^0.26.1",
-    "baidu-map-vue3": "^0.4.9",
     "element-plus": "^2.1.11",
     "js-cookie": "^3.0.1",
     "lodash.debounce": "^4.0.8",

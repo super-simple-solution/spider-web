@@ -1,12 +1,10 @@
 <template>
   <div class="navbar">
     <div class="flex items-center">
-      <div class="nav-left flex">
-        <div class="logo-container">
-          <span>spider-web</span>
-        </div>
-        <div class="nav-home">
-          <svg-icon name="home" />
+      <div class="nav-left flex justify-between">
+        <div class="logo-container">spider-web</div>
+        <div class="nav-home flex items-center">
+          <svg-icon name="home" class="mx-10" />
           <span class="ml10">应用中心</span>
         </div>
       </div>
@@ -36,7 +34,6 @@ import Sidebar from './Sidebar/index.vue'
   font-size: 14px;
 
   .nav-home {
-    display: inline-block;
     cursor: pointer;
   }
 

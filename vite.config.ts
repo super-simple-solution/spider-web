@@ -11,17 +11,13 @@ import eslintPlugin from 'vite-plugin-eslint'
 
 const envStr = 'test'
 
-const evnPath = `http://gongyi-${envStr}.zhcslyg.com`
-
 const pathMap = {
-  online: 'https://online.zhcslyg.com', // online环境，打开以后一定要小心操作！！！谁打开谁对后果买单！！！
-  test: evnPath,
-  pre: evnPath,
+  test: 'https://baidu.com',
 }
 
 export default defineConfig({
-  base: '/custom/',
-  publicDir: '/custom',
+  base: '/spider/',
+  publicDir: '/spider',
   resolve: {
     alias: {
       '@/': `${path.resolve(__dirname, './src')}/`,
@@ -33,7 +29,7 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: pathMap[envStr],
-        rewrite: (path) => path.replace(/^\/api/, '/bus/web_awesomed'),
+        rewrite: (path) => path.replace(/^\/api/, '/spider/'),
         changeOrigin: true,
         ws: true,
       },

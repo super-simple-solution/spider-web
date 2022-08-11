@@ -5,7 +5,7 @@
         <div class="logo-container">
           <span>spider-web</span>
         </div>
-        <div class="nav-home" @click="toHome">
+        <div class="nav-home">
           <svg-icon name="home" />
           <span class="ml10">应用中心</span>
         </div>
@@ -17,7 +17,6 @@
 </template>
 
 <script lang="ts" setup>
-import { toHome } from '@/utils/auth'
 import Sidebar from './Sidebar/index.vue'
 </script>
 
